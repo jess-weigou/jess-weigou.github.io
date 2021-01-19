@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>分模块刷力扣题</title>
+    <link href="/2021/01/10/%E5%88%86%E6%A8%A1%E5%9D%97%E5%88%B7%E5%8A%9B%E6%89%A3%E9%A2%98/"/>
+    <url>/2021/01/10/%E5%88%86%E6%A8%A1%E5%9D%97%E5%88%B7%E5%8A%9B%E6%89%A3%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h1><style>table th:first-of-type {    width: 20%;}table th:nth-of-type(2) {    width: 50%;}table th:nth-of-type(3) {    width: 20%;} table th:nth-of-type(4) {    width: 30%;}</style><div style="font-size:20px"><table><thead><tr><th align="center">题号</th><th align="center">题目</th><th align="center">语言</th><th align="center">难易程度</th></tr></thead><tbody><tr><td align="center">1</td><td align="center">两数之和</td><td align="center">c</td><td align="center">Easy</td></tr><tr><td align="center">11</td><td align="center">乘最多的水</td><td align="center">go</td><td align="center">Medium</td></tr><tr><td align="center">15</td><td align="center">三数之和</td><td align="center">go</td><td align="center">Medium</td></tr><tr><td align="center">16</td><td align="center">最接近的三数之和</td><td align="center">go</td><td align="center">Medium</td></tr><tr><td align="center">41</td><td align="center">缺失一个正数</td><td align="center">go</td><td align="center">Hard</td></tr><tr><td align="center">42</td><td align="center">接雨水</td><td align="center">go</td><td align="center">Hard</td></tr><tr><td align="center"></td><td align="center"></td><td align="center">go</td><td align="center"></td></tr></tbody></table></div><h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><div style="font-size:20px"><table><thead><tr><th>题号</th><th>题目</th><th>语言</th><th>难易程度</th></tr></thead><tbody><tr><td></td><td></td><td></td><td></td></tr></tbody></table></div>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>力扣四十二：接雨水</title>
+    <link href="/2021/01/09/%E5%8A%9B%E6%89%A3%E5%9B%9B%E5%8D%81%E4%BA%8C%EF%BC%9A%E6%8E%A5%E9%9B%A8%E6%B0%B4/"/>
+    <url>/2021/01/09/%E5%8A%9B%E6%89%A3%E5%9B%9B%E5%8D%81%E4%BA%8C%EF%BC%9A%E6%8E%A5%E9%9B%A8%E6%B0%B4/</url>
+    
+    <content type="html"><![CDATA[<p>给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p><h4 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h4><p>输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]<br>输出：6<br>解释：上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。 </p><p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/rainwatertrap.png" alt="示例1图片"></p><h4 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h4><p>输入：height = [4,2,0,3,2,5]<br>输出：9</p><h4 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h4><li>n == height.length</li><li>0 <= n <= 3 * 104</li><li>0 <= height[i] <= 105</li><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p class="note note-primary">    单词注释：     height[left] left位置上的格子的数量    maxl 左边格子最大的格子</p><p>  这题比较难，用双指针方法代码比较简洁，用示例1举例子，先找height[left]与height[right]中小的数字，然后执行小数字方代码，如果height[left]比maxl还要大,就把maxl=height[left]，如果不是，那就说明这一格肯定可以装水（可以看代码的第一个注释的解释），把所有可以装水的格子的装水量加起来就是答案。</p><h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">trap</span><span class="hljs-params">(height []<span class="hljs-keyword">int</span>)</span> <span class="hljs-title">int</span></span> &#123;    left,right,maxl,maxr,res := <span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(height)<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>    <span class="hljs-keyword">for</span> left&lt;=right&#123;         <span class="hljs-keyword">if</span> height[left]&lt;height[right]&#123;             <span class="hljs-keyword">if</span> maxl&lt;=height[left]&#123;                maxl=height[left]             &#125;<span class="hljs-keyword">else</span>&#123;                 <span class="hljs-comment">//左边肯定有比height[left]高的墙，右边有maxr＞maxl，右边肯定有比height[left]高的墙，水在这一格的高度就是maxl-height[left]，下面同理</span>                res = res+maxl-height[left]             &#125;             left++         &#125;<span class="hljs-keyword">else</span>&#123;             <span class="hljs-keyword">if</span> maxr&lt;height[right]&#123;                 maxr=height[right]             &#125;<span class="hljs-keyword">else</span>&#123;                 <span class="hljs-comment">//右边肯定有比height[right]高的墙</span>                res = res+maxr-height[right];             &#125;             right--         &#125;    &#125;    <span class="hljs-keyword">return</span> res&#125;</code></pre>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>力扣-四十一：缺失一个正数</title>
+    <link href="/2021/01/06/%E5%8A%9B%E6%89%A3-%E5%9B%9B%E5%8D%81%E4%B8%80%EF%BC%9A%E7%BC%BA%E5%A4%B1%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%95%B0/"/>
+    <url>/2021/01/06/%E5%8A%9B%E6%89%A3-%E5%9B%9B%E5%8D%81%E4%B8%80%EF%BC%9A%E7%BC%BA%E5%A4%B1%E4%B8%80%E4%B8%AA%E6%AD%A3%E6%95%B0/</url>
+    
+    <content type="html"><![CDATA[<h3 id="题目：给你一个未排序的整数数组，请你找出其中没有出现的最小的正整数。"><a href="#题目：给你一个未排序的整数数组，请你找出其中没有出现的最小的正整数。" class="headerlink" title="题目：给你一个未排序的整数数组，请你找出其中没有出现的最小的正整数。"></a>题目：给你一个未排序的整数数组，请你找出其中没有出现的最小的正整数。</h3><h4 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h4><p>输入: [1,2,0]<br>输出: 3</p><h4 id="示例-2"><a href="#示例-2" class="headerlink" title="示例 2:"></a>示例 2:</h4><p>输入: [3,4,-1,1]<br>输出: 2</p><h4 id="示例-3"><a href="#示例-3" class="headerlink" title="示例 3:"></a>示例 3:</h4><p>输入: [7,8,9,11,12]<br>输出: 1</p><h4 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h4><p>你的算法的时间复杂度应为O(n)，并且只能使用常数级别的额外空间。</p><h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>用map做，先把数放进map里面<code>map_num[v]=v</code>，再用哈希的思想，判断这个下标和值相不相同。</p><h4 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h4><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">firstMissingPositive</span><span class="hljs-params">(nums []<span class="hljs-keyword">int</span>)</span> <span class="hljs-title">int</span></span> &#123;    map_num:=<span class="hljs-built_in">make</span>(<span class="hljs-keyword">map</span>[<span class="hljs-keyword">int</span>]<span class="hljs-keyword">int</span>,<span class="hljs-built_in">len</span>(nums))    <span class="hljs-keyword">for</span> _,v :=<span class="hljs-keyword">range</span> nums&#123;        map_num[v]=v    &#125;    <span class="hljs-comment">//用map来判断这个值在不在确实很方便</span>    <span class="hljs-keyword">for</span> i:=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-built_in">len</span>(nums);i++&#123;        <span class="hljs-keyword">if</span> _,ok:=map_num[i];!ok&#123;            <span class="hljs-keyword">return</span> i        &#125;    &#125;    <span class="hljs-comment">//如果数字全部有序，就输出个数加一</span>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">len</span>(nums)+<span class="hljs-number">1</span>&#125;</code></pre>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>力扣十六 最接近的三数之和</title>
+    <link href="/2021/01/05/%E5%8A%9B%E6%89%A3%E5%8D%81%E5%85%AD%20%E6%9C%80%E6%8E%A5%E8%BF%91%E7%9A%84%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/"/>
+    <url>/2021/01/05/%E5%8A%9B%E6%89%A3%E5%8D%81%E5%85%AD%20%E6%9C%80%E6%8E%A5%E8%BF%91%E7%9A%84%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    
+    <content type="html"><![CDATA[<p class="note note-primary">庆祝自己第一次达到百分之95以上<p>执行用时：4 ms, 在所有 Go 提交中击败了95.59%的用户</p><p>内存消耗：2.7 MB, 在所有 Go 提交中击败了98.89%的用户</p></p><h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给定一个包括 n 个整数的数组 nums 和 一个目标值 target。找出 nums 中的三个整数，使得它们的和与 target 最接近。返回这三个数的和。假定每组输入只存在唯一答案。</p><h4 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h4><p>输入：nums = [-1,2,1,-4], target = 1<br>输出：2<br>解释：与 target 最接近的和是 2 (-1 + 2 + 1 = 2) 。</p><p><strong>提示：</strong></p><ul><li><p>3 &lt;= nums.length &lt;= 10^3</p></li><li><p>-10^3 &lt;= nums[i] &lt;= 10^3</p></li><li><p>*-10^4 &lt;= target &lt;= 10^4 </p></li></ul><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>和第十五题类似，先排序，后用对撞指针对后面的数字进行扫描，只需注意一点<strong>return的是sum的值，min却是target-sum</strong></p><h4 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h4><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">threeSumClosest</span><span class="hljs-params">(nums []<span class="hljs-keyword">int</span>, target <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">int</span></span> &#123;    <span class="hljs-comment">//先排序</span>    min:=<span class="hljs-number">999999</span>    <span class="hljs-keyword">var</span> value <span class="hljs-keyword">int</span>    sort.Ints(nums)    length:=<span class="hljs-built_in">len</span>(nums)    <span class="hljs-comment">//确认好一个数之后用对撞指针</span>     <span class="hljs-keyword">for</span> k:=<span class="hljs-number">0</span>;k&lt;length<span class="hljs-number">-2</span>;k++&#123;        left:=k+<span class="hljs-number">1</span>        right:=length<span class="hljs-number">-1</span>        <span class="hljs-keyword">for</span> left&lt;right&#123;            sum := nums[left]+nums[right]+nums[k]            <span class="hljs-keyword">if</span>(sum==target)&#123;                <span class="hljs-keyword">return</span> sum            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(sum&lt;target)&#123;                <span class="hljs-keyword">if</span>(target-sum&lt;min)&#123;                    min=target-sum                    value=sum  <span class="hljs-comment">//这里要注意，return的是sum的值，min却是target-sum</span>                &#125;                left++            &#125;<span class="hljs-keyword">else</span>&#123;                <span class="hljs-keyword">if</span>(sum-target&lt;min)&#123;                    min=sum-target                    value=sum                &#125;                right--            &#125;        &#125;    &#125;    <span class="hljs-keyword">return</span> value&#125;</code></pre>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>力扣十五;三数之和</title>
+    <link href="/2021/01/04/%E5%8A%9B%E6%89%A3%E5%8D%81%E4%BA%94;%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/"/>
+    <url>/2021/01/04/%E5%8A%9B%E6%89%A3%E5%8D%81%E4%BA%94;%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+    
+    <content type="html"><![CDATA[<h4 id="15-三数之和"><a href="#15-三数之和" class="headerlink" title="15. 三数之和"></a><a href="https://leetcode-cn.com/problems/3sum/">15. 三数之和</a></h4><p>难度中等</p><p>给你一个包含 <em>n</em> 个整数的数组 <code>nums</code>，判断 <code>nums</code> 中是否存在三个元素 <em>a，b，c ，</em>使得 <em>a + b + c =</em> 0 ？请你找出所有满足条件且不重复的三元组。</p><p><strong>注意：</strong>答案中不可以包含重复的三元组。</p><p><strong>示例：</strong></p><pre><code class="hljs lsl">给定数组 nums = [<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">-4</span>]，满足要求的三元组集合为：[  [<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>],  [<span class="hljs-number">-1</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">2</span>]]</code></pre><h4 id="思路：先排序，再用for从0到length-2中选一个k值，选定k值之后把k后面的数用对撞指针从k-1到length-1用对撞指针求一个值等于-num-k-，记得判断left右边和right左边的值是否和自己相同"><a href="#思路：先排序，再用for从0到length-2中选一个k值，选定k值之后把k后面的数用对撞指针从k-1到length-1用对撞指针求一个值等于-num-k-，记得判断left右边和right左边的值是否和自己相同" class="headerlink" title="思路：先排序，再用for从0到length-2中选一个k值，选定k值之后把k后面的数用对撞指针从k+1到length-1用对撞指针求一个值等于-num[k]，记得判断left右边和right左边的值是否和自己相同"></a>思路：先排序，再用for从0到length-2中选一个k值，选定k值之后把k后面的数用对撞指针从k+1到length-1用对撞指针求一个值等于-num[k]，记得判断left右边和right左边的值是否和自己相同</h4><p><strong>一直出现这个错误，检查之后发现最后少个大括号</strong></p><p><code>Line 40: Char 6: syntax error: unexpected __helper__, expecting ( (solution.go)</code></p><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">threeSum</span><span class="hljs-params">(nums []<span class="hljs-keyword">int</span>)</span> [][]<span class="hljs-title">int</span></span> &#123;    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(nums)&lt;<span class="hljs-number">3</span>&#123;        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>    &#125;    <span class="hljs-comment">//先排序</span>    sort.Ints(nums)    length:=<span class="hljs-built_in">len</span>(nums)    <span class="hljs-keyword">var</span> res [][]<span class="hljs-keyword">int</span>    <span class="hljs-comment">//确认好一个数之后用对撞指针</span>     <span class="hljs-keyword">for</span> k:=<span class="hljs-number">0</span>;k&lt;length<span class="hljs-number">-2</span>;k++&#123;        <span class="hljs-keyword">if</span> nums[k]&gt;<span class="hljs-number">0</span> &#123;            <span class="hljs-keyword">break</span>        &#125;        <span class="hljs-keyword">if</span> k&gt;<span class="hljs-number">0</span>&amp;&amp;nums[k]==nums[k<span class="hljs-number">-1</span>]&#123;            <span class="hljs-keyword">continue</span>        &#125;        left:=k+<span class="hljs-number">1</span>        right:=length<span class="hljs-number">-1</span>        <span class="hljs-keyword">for</span> left&lt;right&#123;            sum := nums[left]+nums[right]+nums[k]            <span class="hljs-comment">//要判断left和它右边的值一不一样，right的值和它左边的一不一样</span>            <span class="hljs-keyword">if</span> sum&gt;<span class="hljs-number">0</span>&#123;                <span class="hljs-keyword">for</span> right=right<span class="hljs-number">-1</span>;right&gt;left &amp;&amp;nums[right]==nums[right+<span class="hljs-number">1</span>];right-- &#123;&#125;            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> sum&lt;<span class="hljs-number">0</span> &#123;                <span class="hljs-keyword">for</span> left=left+<span class="hljs-number">1</span>;right&gt;left &amp;&amp;nums[left]==nums[left<span class="hljs-number">-1</span>];left++ &#123;&#125;            &#125;<span class="hljs-keyword">else</span>&#123;                res = <span class="hljs-built_in">append</span>(res,[]<span class="hljs-keyword">int</span>&#123;nums[k],nums[left],nums[right]&#125;)                <span class="hljs-keyword">for</span> right=right<span class="hljs-number">-1</span>;right&gt;left &amp;&amp;nums[right]==nums[right+<span class="hljs-number">1</span>];right-- &#123;&#125;                <span class="hljs-keyword">for</span> left=left+<span class="hljs-number">1</span>;right&gt;left &amp;&amp;nums[left]==nums[left<span class="hljs-number">-1</span>];left++ &#123;&#125;                     &#125;        &#125;    &#125;    <span class="hljs-keyword">return</span> res&#125;</code></pre>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>力扣十一;乘最多水的容器</title>
+    <link href="/2020/12/30/%E5%8A%9B%E6%89%A3%E5%8D%81%E4%B8%80;%E4%B9%98%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/"/>
+    <url>/2020/12/30/%E5%8A%9B%E6%89%A3%E5%8D%81%E4%B8%80;%E4%B9%98%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/</url>
+    
+    <content type="html"><![CDATA[<p>给你 n 个非负整数 a1，a2，…，an，每个数代表坐标中的一个点 (i, ai) 。在坐标内画 n 条垂直线，垂直线 i 的两个端点分别为 (i, ai) 和 (i, 0) 。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。</p><p>说明：你不能倾斜容器。</p><p>示例 1：</p><p><img src="https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/07/25/question_11.jpg"></p><p>输入：[1,8,6,2,5,4,8,3,7]<br>输出：49<br>解释：图中垂直线代表输入数组 [1,8,6,2,5,4,8,3,7]。在此情况下，容器能够容纳水（表示为蓝色部分）的最大值为 49。<br>示例 2：</p><p>输入：height = [1,1]<br>输出：1<br>示例 3：</p><p>输入：height = [4,3,2,1,4]<br>输出：16<br>示例 4：</p><p>输入：height = [1,2,1]<br>输出：2</p><h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>​            用到对撞指针的思路，指针开始指向开头和末尾，从开始和末尾分别判断， 如果  (height[end]&gt;height[first])，就first++。</p><h4 id="go代码"><a href="#go代码" class="headerlink" title="go代码"></a>go代码</h4><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">maxArea</span><span class="hljs-params">(height []<span class="hljs-keyword">int</span>)</span> <span class="hljs-title">int</span></span> &#123;    max:=<span class="hljs-number">0</span>    end:=<span class="hljs-built_in">len</span>(height)<span class="hljs-number">-1</span>    first:=<span class="hljs-number">0</span>    <span class="hljs-keyword">var</span> ans <span class="hljs-keyword">int</span>    <span class="hljs-keyword">for</span> first&lt;end&#123;        width := end-first        <span class="hljs-keyword">if</span>(height[end]&gt;height[first])&#123;            ans=width*height[first]            first++        &#125;<span class="hljs-keyword">else</span>&#123;            ans=width*height[end]            end--        &#125;        <span class="hljs-keyword">if</span>(max&lt;ans)&#123;            max=ans        &#125;    &#125;   <span class="hljs-keyword">return</span> max &#125;</code></pre>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>makedown基础语法</title>
+    <link href="/2020/12/03/makedown%E8%AF%AD%E6%B3%95/"/>
+    <url>/2020/12/03/makedown%E8%AF%AD%E6%B3%95/</url>
+    
+    <content type="html"><![CDATA[<h1 id="1、字体大小"><a href="#1、字体大小" class="headerlink" title="1、字体大小"></a>1、字体大小</h1><h1 id="这是一级标题"><a href="#这是一级标题" class="headerlink" title="这是一级标题"></a>这是一级标题</h1><h2 id="这是二级标题"><a href="#这是二级标题" class="headerlink" title="这是二级标题"></a>这是二级标题</h2><h3 id="这是三级标题"><a href="#这是三级标题" class="headerlink" title="这是三级标题"></a>这是三级标题</h3><h4 id="这是四级标题"><a href="#这是四级标题" class="headerlink" title="这是四级标题"></a>这是四级标题</h4><h5 id="这是五级标题"><a href="#这是五级标题" class="headerlink" title="这是五级标题"></a>这是五级标题</h5><h6 id="这是六级标题"><a href="#这是六级标题" class="headerlink" title="这是六级标题"></a>这是六级标题</h6><pre><code class="hljs clean"># 这是一级标题## 这是二级标题### 这是三级标题#### 这是四级标题##### 这是五级标题###### 这是六级标题</code></pre><h6 id="2、"><a href="#2、" class="headerlink" title="2、"></a>2、</h6><p><strong>加粗</strong></p><pre><code class="hljs *">**加粗**</code></pre><p><em>斜体</em></p><pre><code class="hljs asciidoc"><span class="hljs-strong">*斜体*</span></code></pre><p>输入代码</p><pre><code class="hljs autohotkey">直接输入”```“然后按下回车键（`在英文情况加按左上角波浪号可打出）</code></pre><p>3、url</p><p>图片导入</p><p>![](C:\Users\89500\Desktop\HTML\my storys\hexo\themes\fluid\source\img\avatar.png)</p><pre><code class="hljs markdown">绝对路径： ![<span class="hljs-string">这里输入图片名字</span>](<span class="hljs-link">这里输入绝对路径</span>)</code></pre>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>情侣间的日常琐事记录</title>
+    <link href="/2020/11/29/%E6%83%85%E4%BE%A3%E7%94%9C%E8%9C%9C%E5%B0%8F%E6%97%A5%E5%B8%B8/"/>
+    <url>/2020/11/29/%E6%83%85%E4%BE%A3%E7%94%9C%E8%9C%9C%E5%B0%8F%E6%97%A5%E5%B8%B8/</url>
+    
+    <content type="html"><![CDATA[<h1 id="情侣间的日常琐事记录"><a href="#情侣间的日常琐事记录" class="headerlink" title="情侣间的日常琐事记录"></a>情侣间的日常琐事记录</h1><p class="label label-warning"style= "font-size:24px" >记录了一部分成为情侣之后的日常，超甜勿看</p><hr><h3 id="2020-7-10第一次约会去撸猫"><a href="#2020-7-10第一次约会去撸猫" class="headerlink" title="2020.7.10第一次约会去撸猫"></a>2020.7.10第一次约会去撸猫</h3><h3 id="2020-7-12-yyj生日、第一次一起去逛西湖"><a href="#2020-7-12-yyj生日、第一次一起去逛西湖" class="headerlink" title="2020.7.12 yyj生日、第一次一起去逛西湖"></a>2020.7.12 yyj生日、第一次一起去逛西湖</h3><h3 id="2020-7-19-答辩结束-yyj到家啦-虽然结果不咋地-但是收获了一个npy-不错"><a href="#2020-7-19-答辩结束-yyj到家啦-虽然结果不咋地-但是收获了一个npy-不错" class="headerlink" title="2020.7.19 答辩结束:yyj到家啦,虽然结果不咋地,但是收获了一个npy,不错~"></a>2020.7.19 答辩结束:yyj到家啦,虽然结果不咋地,但是收获了一个npy,不错~</h3><h3 id="2020-8-第一次出去玩-乌镇旅游-一起看了一部恐怖片）"><a href="#2020-8-第一次出去玩-乌镇旅游-一起看了一部恐怖片）" class="headerlink" title="2020,8.第一次出去玩(乌镇旅游+一起看了一部恐怖片）"></a>2020,8.第一次出去玩(乌镇旅游+一起看了一部恐怖片）</h3><h3 id="2020-8-2第一出认真的舌吻哈哈"><a href="#2020-8-2第一出认真的舌吻哈哈" class="headerlink" title="2020.8.2第一出认真的舌吻哈哈"></a>2020.8.2第一出认真的舌吻哈哈</h3><h3 id="2020-8-25第一个情人节-看了第一场电影、收获第一支玫瑰🌹"><a href="#2020-8-25第一个情人节-看了第一场电影、收获第一支玫瑰🌹" class="headerlink" title="2020.8.25第一个情人节,看了第一场电影、收获第一支玫瑰🌹"></a>2020.8.25第一个情人节,看了第一场电影、收获第一支玫瑰🌹</h3><h3 id="2020-9-6他来抗州找我玩，第一出去逛了宜家"><a href="#2020-9-6他来抗州找我玩，第一出去逛了宜家" class="headerlink" title="2020.9.6他来抗州找我玩，第一出去逛了宜家"></a>2020.9.6他来抗州找我玩，第一出去逛了宜家</h3><h3 id="2020-10-2获得了秋天第一个柚子"><a href="#2020-10-2获得了秋天第一个柚子" class="headerlink" title="2020.10.2获得了秋天第一个柚子"></a>2020.10.2获得了秋天第一个柚子</h3><p><img src="http://qjzagkyy7.hn-bkt.clouddn.com/%E6%9F%9A%E5%AD%901.jpg" alt="柚子"></p><hr><h3 id="2020-11-13第一次在外面过夜，可惜没看到日出，但是一起包饺子了"><a href="#2020-11-13第一次在外面过夜，可惜没看到日出，但是一起包饺子了" class="headerlink" title="2020.11.13第一次在外面过夜，可惜没看到日出，但是一起包饺子了"></a>2020.11.13第一次在外面过夜，可惜没看到日出，但是一起包饺子了</h3>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>情侣间的小问题</title>
+    <link href="/2020/11/29/%E6%83%85%E4%BE%A3%E9%97%B4%E6%97%B6%E9%97%B4%E9%97%AE%E9%A2%98/"/>
+    <url>/2020/11/29/%E6%83%85%E4%BE%A3%E9%97%B4%E6%97%B6%E9%97%B4%E9%97%AE%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<h4 id="问题：粘在一起反而会玩玩不痛快，学的时候效率低学不进去。"><a href="#问题：粘在一起反而会玩玩不痛快，学的时候效率低学不进去。" class="headerlink" title="问题：粘在一起反而会玩玩不痛快，学的时候效率低学不进去。"></a>问题：粘在一起反而会玩玩不痛快，学的时候效率低学不进去。</h4><p>做作业学习都在图书馆，来易班默认就是玩的，默认把时间浪费掉。我们是情侣，不是商业合作伙伴，很多时候的付出其实也没那么计较实质性看得见的回报</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>力扣第一题：两数之和</title>
+    <link href="/2020/11/26/%E5%8A%9B%E6%89%A3%E7%AC%AC%E4%B8%80%E9%A2%98/"/>
+    <url>/2020/11/26/%E5%8A%9B%E6%89%A3%E7%AC%AC%E4%B8%80%E9%A2%98/</url>
+    
+    <content type="html"><![CDATA[<p><strong>观前啰嗦：</strong>这是我第一次做力扣题目，本题用c语言做的，接下来打算用go语言写，来锻炼我go语言能力，无论用哪种语言其实都一样，语言是一种工具，思想才是最重要的。</p><h2>1、两数之和</h2><p>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p><p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。</p><p> <strong>示例</strong></p><pre><code class="hljs angelscript">给定 nums = [<span class="hljs-number">2</span>, <span class="hljs-number">7</span>, <span class="hljs-number">11</span>, <span class="hljs-number">15</span>], target = <span class="hljs-number">9</span>因为 nums[<span class="hljs-number">0</span>] + nums[<span class="hljs-number">1</span>] = <span class="hljs-number">2</span> + <span class="hljs-number">7</span> = <span class="hljs-number">9</span>所以返回 [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>]</code></pre><p>思想：这题思想不难理解，就是第一次错题有些细节要注意，target表示给的最终指，returnSize是个指针，表示最终的返回数个数。</p><p><strong>代码</strong></p><pre><code class="hljs c"><span class="hljs-comment">/*我用最传统的方法写的*/</span><span class="hljs-function"><span class="hljs-keyword">int</span>* <span class="hljs-title">twoSum</span><span class="hljs-params">(<span class="hljs-keyword">int</span>* nums, <span class="hljs-keyword">int</span> numsSize, <span class="hljs-keyword">int</span> target, <span class="hljs-keyword">int</span>* returnSize)</span></span>&#123;    *returnSize =<span class="hljs-number">2</span>;<span class="hljs-comment">//用来说明有几个返回大小</span>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> a[<span class="hljs-number">2</span>];    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;numsSize<span class="hljs-number">-1</span>;i++)    &#123;        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=i+<span class="hljs-number">1</span>;j&lt;numsSize;j++)        &#123;            <span class="hljs-keyword">if</span>((nums[i]+nums[j])==target)            &#123;                a[<span class="hljs-number">0</span>]=i;                a[<span class="hljs-number">1</span>]=j;                <span class="hljs-keyword">return</span> a;            &#125;         &#125;    &#125;    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;&#125;</code></pre>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>浅谈git的使用</title>
+    <link href="/2020/11/19/%E6%B5%85%E8%B0%88git%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <url>/2020/11/19/%E6%B5%85%E8%B0%88git%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    
+    <content type="html"><![CDATA[<h2 id="观前提醒：我写这个主要是来巩固我学的git操作"><a href="#观前提醒：我写这个主要是来巩固我学的git操作" class="headerlink" title="观前提醒：我写这个主要是来巩固我学的git操作"></a><p class="note note-primary">观前提醒：我写这个主要是来巩固我学的git操作</p></h2><p>在程序中#这个符号后面代表我的注释</p><h2 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h2><h4 id="0、先安装git，这里我引用别人的文章git安装"><a href="#0、先安装git，这里我引用别人的文章git安装" class="headerlink" title="0、先安装git，这里我引用别人的文章git安装"></a>0、先安装git，这里我引用别人的文章<a href="https://www.cnblogs.com/xueweisuoyong/p/11914045.html">git安装</a></h4><h4 id="1、创建一个文件夹，创建一个readme-txt文件，里面写入hello-git文字（这个之后会用到）"><a href="#1、创建一个文件夹，创建一个readme-txt文件，里面写入hello-git文字（这个之后会用到）" class="headerlink" title="1、创建一个文件夹，创建一个readme.txt文件，里面写入hello git文字（这个之后会用到）"></a>1、创建一个文件夹，创建一个readme.txt文件，里面写入hello git文字（这个之后会用到）</h4><h4 id="2、在文件夹中右键，会有一个Git-Bosh-Here，点这个"><a href="#2、在文件夹中右键，会有一个Git-Bosh-Here，点这个" class="headerlink" title="2、在文件夹中右键，会有一个Git Bosh Here，点这个"></a>2、在文件夹中右键，会有一个Git Bosh Here，点这个</h4><p><img src="/img/gitbosh.png"></p><h4 id="3、配置环境，输入提交人的名字和邮箱"><a href="#3、配置环境，输入提交人的名字和邮箱" class="headerlink" title="3、配置环境，输入提交人的名字和邮箱"></a>3、配置环境，输入提交人的名字和邮箱</h4><pre><code class="hljs routeros"><span class="hljs-variable">$git</span><span class="hljs-built_in"> config </span>--global user.name <span class="hljs-string">&quot;输入你的名字&quot;</span><span class="hljs-variable">$git</span><span class="hljs-built_in"> config </span>--global user.email <span class="hljs-string">&quot;输入你的邮箱&quot;</span><span class="hljs-variable">$git</span><span class="hljs-built_in"> config </span>--global -l  #查看仓库配置，用来查看你是否配置成功</code></pre><h4 id="4-建立仓库"><a href="#4-建立仓库" class="headerlink" title="4.建立仓库"></a>4.建立仓库</h4><pre><code class="hljs autoit">$git init     <span class="hljs-meta">#会给你创建一个.git隐藏文件，用来存放你的操作记录，注意在你的路径里面最好不要有中文</span></code></pre><h2 id="添加和提交文件"><a href="#添加和提交文件" class="headerlink" title="添加和提交文件"></a>添加和提交文件</h2><p>创建好文件夹和txt文件之后，在git里面输入</p><pre><code class="hljs autoit">$git status <span class="hljs-meta">#查看现在的仓库状态</span></code></pre><p>会出现这样的语句</p><pre><code class="hljs sql">Untracked files:  <span class="hljs-comment">#有个未被跟踪的readme.txt文件</span>  (<span class="hljs-keyword">use</span> <span class="hljs-string">&quot;git add &lt;file&gt;...&quot;</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">include</span> <span class="hljs-keyword">in</span> what will be committed)        readme .txt<span class="hljs-keyword">no</span> changes added <span class="hljs-keyword">to</span> <span class="hljs-keyword">commit</span> (<span class="hljs-keyword">use</span> <span class="hljs-string">&quot;git add&quot;</span> <span class="hljs-keyword">and</span>/<span class="hljs-keyword">or</span> <span class="hljs-string">&quot;git commit -a&quot;</span>)</code></pre><p>然后添加文件</p><pre><code class="hljs dockerfile">git <span class="hljs-keyword">add</span><span class="bash"> readme.txt</span></code></pre><p>如果提交了没提示那就是提交正确了，输入了命令什么都没提示就是最好的提示。</p><p>最后提交文件</p><pre><code class="hljs pgsql">git <span class="hljs-keyword">commit</span> -m&quot;写你提交了什么东西，方便回溯的时候看回溯到哪个版本&quot;  #可以<span class="hljs-keyword">add</span>多个文件一起<span class="hljs-keyword">commit</span></code></pre><p>现在再输入git status会显示</p><pre><code class="hljs pgsql">$ git status<span class="hljs-keyword">On</span> branch dev<span class="hljs-keyword">nothing</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">commit</span>, working tree clean #没有东西可以提交</code></pre><p>用 git log命令能知道提交人的id和提交日期</p><pre><code class="hljs angelscript">$ git logcommit <span class="hljs-number">507671f</span>473bbbfa18ec0c2de9ed80c27cc483b53Author: jess-weigou &lt;<span class="hljs-symbol">895006375@</span>qq.com&gt;Date:   Fri Nov <span class="hljs-number">13</span> <span class="hljs-number">00</span>:<span class="hljs-number">10</span>:<span class="hljs-number">45</span> <span class="hljs-number">2020</span> +<span class="hljs-number">0800</span>wrote a readme.file</code></pre><p>用 git show命令能知道最近一个人的提交id，id后面回溯的时候要用到</p><pre><code class="hljs angelscript">$ git showcommit <span class="hljs-number">20</span>b009be6781d2fe5df568f8bf859bdf7e489408 (HEAD -&gt; dev) #这一串字母就是                                                                    #commit idAuthor: jess-weigou &lt;<span class="hljs-symbol">895006375@</span>qq.com&gt;Date:   Thu Nov <span class="hljs-number">26</span> <span class="hljs-number">09</span>:<span class="hljs-number">44</span>:<span class="hljs-number">19</span> <span class="hljs-number">2020</span> +<span class="hljs-number">0800</span>    write a readme.txt</code></pre><p>我们再在readme.txt文件中“hello git。”的基础上再添加“hello world”文字，并保存。</p><h2 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h2><p>  我们来讲git最有趣的回溯功能,先用git log功能看提交的记录和提交人的id,这里我提交了多次。</p><pre><code class="hljs angelscript">$ git logcommit <span class="hljs-number">80</span>ee417c0d4eb1803202b762dbabe747fa38d1f6 (HEAD -&gt; dev)Author: jess-weigou &lt;<span class="hljs-symbol">895006375@</span>qq.com&gt;Date:   Mon Nov <span class="hljs-number">30</span> <span class="hljs-number">16</span>:<span class="hljs-number">40</span>:<span class="hljs-number">22</span> <span class="hljs-number">2020</span> +<span class="hljs-number">0800</span>    add hello worldcommit <span class="hljs-number">3</span>bb0b8bfb6f2f9178d31a4d0cb372b3d87b461aeAuthor: jess-weigou &lt;<span class="hljs-symbol">895006375@</span>qq.com&gt;Date:   Sun Nov <span class="hljs-number">29</span> <span class="hljs-number">09</span>:<span class="hljs-number">46</span>:<span class="hljs-number">26</span> <span class="hljs-number">2020</span> +<span class="hljs-number">0800</span>    add hello worldcommit <span class="hljs-number">20</span>b009be6781d2fe5df568f8bf859bdf7e489408Author: jess-weigou &lt;<span class="hljs-symbol">895006375@</span>qq.com&gt;Date:   Thu Nov <span class="hljs-number">26</span> <span class="hljs-number">09</span>:<span class="hljs-number">44</span>:<span class="hljs-number">19</span> <span class="hljs-number">2020</span> +<span class="hljs-number">0800</span>    write a readme.txtcommit <span class="hljs-number">268</span>d66e08b1ebf50d9ddbf20096504592463051dAuthor: jess-weigou &lt;<span class="hljs-symbol">895006375@</span>qq.com&gt;Date:   Thu Nov <span class="hljs-number">26</span> <span class="hljs-number">09</span>:<span class="hljs-number">34</span>:<span class="hljs-number">36</span> <span class="hljs-number">2020</span> +<span class="hljs-number">0800</span>    write a readme.txt</code></pre><p>用git reset –hard “写提交的id”</p><pre><code class="hljs maxima">$ git <span class="hljs-built_in">reset</span> --hard <span class="hljs-number">20b009</span> #只要前几个字母id就可以匹配到你的提交idHEAD <span class="hljs-built_in">is</span> now <span class="hljs-built_in">at</span> 20b009b write a readme.txt</code></pre><p>这里说head指针已经指向20b009b,我们打开readme.txt，会发现写的“hello world”已经不见了。</p><p><strong>如果回退到以前的版本了还想回会到最新的版本，那咋办？</strong></p><p>找到之前git log的界面，就像我之前git log，那一条最新的日志记录</p><pre><code class="hljs angelscript">$ git logcommit <span class="hljs-number">80</span>ee417c0d4eb1803202b762dbabe747fa38d1f6 (HEAD -&gt; dev)Author: jess-weigou &lt;<span class="hljs-symbol">895006375@</span>qq.com&gt;Date:   Mon Nov <span class="hljs-number">30</span> <span class="hljs-number">16</span>:<span class="hljs-number">40</span>:<span class="hljs-number">22</span> <span class="hljs-number">2020</span> +<span class="hljs-number">0800</span>    add hello world</code></pre><p>输入 git reset –hard “80ee417”就可以回退到之前的最新版本</p><pre><code class="hljs sql">$ git <span class="hljs-keyword">reset</span> <span class="hljs-comment">--hard 80ee417c0</span><span class="hljs-keyword">HEAD</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">now</span> <span class="hljs-keyword">at</span> <span class="hljs-number">80</span>ee417 <span class="hljs-keyword">add</span> hello world</code></pre><p>你会发现hello world又出现了，所以别轻易清屏，清屏了也没关系，用git reflog查看历史命令</p><pre><code class="hljs angelscript">$ git <span class="hljs-built_in">ref</span>log<span class="hljs-number">80</span>ee417 (HEAD -&gt; dev) <span class="hljs-symbol">HEAD@</span>&#123;<span class="hljs-number">0</span>&#125;: reset: moving to <span class="hljs-number">80</span>ee417c0<span class="hljs-number">20</span>b009b <span class="hljs-symbol">HEAD@</span>&#123;<span class="hljs-number">1</span>&#125;: reset: moving to <span class="hljs-number">20</span>b009<span class="hljs-number">80</span>ee417 (HEAD -&gt; dev) <span class="hljs-symbol">HEAD@</span>&#123;<span class="hljs-number">2</span>&#125;: commit: add hello world<span class="hljs-number">3</span>bb0b8b <span class="hljs-symbol">HEAD@</span>&#123;<span class="hljs-number">3</span>&#125;: commit: add hello world<span class="hljs-number">20</span>b009b <span class="hljs-symbol">HEAD@</span>&#123;<span class="hljs-number">4</span>&#125;: commit: write a readme.txt<span class="hljs-number">268</span>d66e <span class="hljs-symbol">HEAD@</span>&#123;<span class="hljs-number">5</span>&#125;: commit: write a readme.txte845d2b (github/master, master) <span class="hljs-symbol">HEAD@</span>&#123;<span class="hljs-number">6</span>&#125;: checkout: moving <span class="hljs-keyword">from</span> master to deve845d2b (github/master, master) <span class="hljs-symbol">HEAD@</span>&#123;<span class="hljs-number">7</span>&#125;: checkout: moving <span class="hljs-keyword">from</span> dev to mastere845d2b (github/master, master) <span class="hljs-symbol">HEAD@</span>&#123;<span class="hljs-number">8</span>&#125;: checkout: moving <span class="hljs-keyword">from</span> master to deve845d2b (github/master, master) <span class="hljs-symbol">HEAD@</span>&#123;<span class="hljs-number">9</span>&#125;: reset: moving to e845<span class="hljs-number">507671f</span> <span class="hljs-symbol">HEAD@</span>&#123;<span class="hljs-number">10</span>&#125;: reset: moving to <span class="hljs-number">50767</span>e845d2b (github/master, master) <span class="hljs-symbol">HEAD@</span>&#123;<span class="hljs-number">11</span>&#125;: commit: add some words<span class="hljs-number">507671f</span> <span class="hljs-symbol">HEAD@</span>&#123;<span class="hljs-number">12</span>&#125;: commit (initial): wrote a readme.file</code></pre>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>良渚游玩</title>
+    <link href="/2020/11/13/%E8%89%AF%E6%B8%9A%E6%B8%B8%E7%8E%A9/"/>
+    <url>/2020/11/13/%E8%89%AF%E6%B8%9A%E6%B8%B8%E7%8E%A9/</url>
+    
+    <content type="html"><![CDATA[<p><img src="/img/avatar.png"></p><p>咕咕咕</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>大一生活的总结</title>
+    <link href="/2020/10/28/%E5%A4%A7%E5%AD%A6%E4%B8%80%E5%B9%B4%E7%94%9F%E6%B4%BB%E7%9A%84%E6%84%9F%E6%82%9F/"/>
+    <url>/2020/10/28/%E5%A4%A7%E5%AD%A6%E4%B8%80%E5%B9%B4%E7%94%9F%E6%B4%BB%E7%9A%84%E6%84%9F%E6%82%9F/</url>
+    
+    <content type="html"><![CDATA[<p>​      </p><p>大一生活最大的收获就是从经济转去了计算机，顺便在转去的时候拿了个一等奖学金。</p><p>​      大一的时候把全部精力都投入怎么提高绩点的路上了，其实现在想起来哦，好多东西都学的太迟了，在大一下的时候才从学长学姐那边了解到以后就业分前后端两个大方向，前端是做页面，在vue，react等主流框架下写代码，后端与数据库打交道，写完后写api接口给前端用，其实我最开始选择后端是因为赚钱多，毕竟后端的任务比较难，前端好上手，一写代码就能看到成果，但是好像以后就业活会比较枯燥比较机械，现在开始加入杭助后端，开始学golang和数据库，和大佬比学的太迟了。</p>  <h2>学习篇：</h2><p>​    在大一下疫情在家的时间，自学了c，学习了指针，链表，结构体，数据结构也学了栈，队列，还有到现在都没理解的分治算法（递归的方式看不懂），二叉树，还有自学了python，但是只能写写基础语法，然后在大一下学了前端的html和css语言（确实很好上手，没有什么逻辑关系，就是没有if语句这些判断），最后还有大一下买的吉他，谈了几天到学校就没时间谈学（现在已经积灰了）。</p> <h2>竞赛篇：</h2> <p>大一下参加证卷投资大赛，发现选导师真的很重要，如果他是你的评委老师你做的东西对他口味分数就会高，其实这个比赛策略组根本就不需要基础，导师会给你题目，给你模板和大概方向，你只需要一定时间把word写长和ppt做漂亮，然后给导师改一下，就能得奖。感觉统调，金融创新应该都差不多，含金量不高，还是大创含金量相对高一点，不过最后还是要花大量时间写word和ppt，一般比赛的时候熬夜是常态，推荐竞赛的话血推数模，acm（这比赛大一就要训练，一般人还参加不了），真的挺硬核。你说大一没人带不敢参加竞赛，其实感兴趣大胆参加，你说没想法，你可以只找一个最粗略的想法，然后找导师问问，如果最粗略也没有，只要你脸皮够厚，直接找导师要，毕竟你拿奖了对导师也有好处，最好早点找导师，迟了可能导师人太多不要你，这是我个人意见，看看就好了。（竞赛真的要多参加哦，说不定有意外惊喜，我女朋友就是竞赛认识的）</p>  <h2>社团篇：</h2><p>社团粗略分为三类，学生会杭助非技术部这种干活交朋友写策划社团，滑轮滑板等兴趣社团，红家、杭电助手技术部这种技术社团，当然还有这种特点都有的社团，我大一参加了经济学院学生会，说一下体验吧，几乎学院一半的人都加入了学生会，你可以在里面交到各种各样的人，还有部门联谊，部长也很亲切，不过一般最亲切的还是同部门的人，举办活动还有东西吃圣诞节还会给你送糖果吃，如果你加入了也最好别退，因为你退了的话本来属于你的活就要平均分配到其他小干事身上和部长身上。其实本质来说哦，就是招你去干活的，事情会挺多，真的贼多，好多活动会轮到你们部门出策划，大家就想想法，出策划，不过等你们部门想的活动节目顺利办完了的时候还是有点小成就感的。我感觉我不适合这种部门，而且竞赛和学业这两个事情有可能会和社团的事情重合，那就有你的爽了。兴趣社团我也去，杭助也才刚刚二面，等体验过了以后再说。</p><hr><p>  最后说说我最近的状态吧，等转到计算机，我熬夜已经成为常态，天天1点睡，4天有早课，然后水课补课，主要选了acm（这课很值），数据结构这种课，要花好长时间写作业，还有报了社团，得花很多时间学东西，还有勤工俭学，帮老师改作业，事情太多了，感觉最近人有点累和迷茫了，得找个时间出去散散心。<br>    1、不是特别清楚下一步怎么走，不知道怎么找老师怎么找项目做，2、不知道从学校到实习这一步改怎么走（打算问问已经工作学长学姐），3、不知道怎么去规划自己的后端学习路线（打算问问部长），好迷茫压，感觉最近学习效率也不高，学了一会不想学了。算了，其实也没关系，都是有办法解决的，跨过这座山，他们就会听见你的故事，先写到这里吧，等我 把这3个问题都解决了就更我的未来学习打算，恋爱部分这边不提了，我整一个完整的板块写。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2020/10/23/hello-world/"/>
+    <url>/2020/10/23/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p class="note note-primary">这是我第一 篇blog，正式开启我的博客之路啦。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>
