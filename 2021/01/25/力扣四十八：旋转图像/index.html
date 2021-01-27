@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>分模块刷力扣题 - My Story</title>
+  <title>力扣四十八：旋转图像 - My Story</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -177,8 +177,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-01-10 00:11" pubdate>
-        2021年1月10日 凌晨
+      <time datetime="2021-01-25 16:49" pubdate>
+        2021年1月25日 下午
       </time>
     </span>
   
@@ -189,7 +189,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      121 字
+      358 字
     </span>
   
 
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      5
        分钟
     </span>
   
@@ -229,98 +229,78 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">分模块刷力扣题</h1>
+            <h1 style="display: none">力扣四十八：旋转图像</h1>
             
             <div class="markdown-body" id="post-body">
-              <h1 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h1><style>
-table th:first-of-type {
-    width: 20%;
-}
-table th:nth-of-type(2) {
-    width: 50%;
-}
-table th:nth-of-type(3) {
-    width: 20%;
-}
- table th:nth-of-type(4) {
-    width: 30%;
-}
-</style>
-<div style="font-size:20px">
+              <h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>给定一个 <em>n</em> × <em>n</em> 的二维矩阵表示一个图像。</p>
+<p>将图像顺时针旋转 90 度。</p>
+<p><strong>说明：</strong></p>
+<p>你必须在<strong>原地</strong>旋转图像，这意味着你需要直接修改输入的二维矩阵。<strong>请不要</strong>使用另一个矩阵来旋转图像。</p>
+<p><strong>示例 1:</strong></p>
+<pre><code class="hljs yaml"><span class="hljs-string">给定</span> <span class="hljs-string">matrix</span> <span class="hljs-string">=</span> 
+[
+  [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],
+  [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>],
+  [<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>]
+]<span class="hljs-string">,</span>
 
-<table>
-<thead>
-<tr>
-<th align="center">题号</th>
-<th align="center">题目</th>
-<th align="center">语言</th>
-<th align="center">难易程度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">1</td>
-<td align="center">两数之和</td>
-<td align="center">c</td>
-<td align="center">Easy</td>
-</tr>
-<tr>
-<td align="center">11</td>
-<td align="center">乘最多的水</td>
-<td align="center">go</td>
-<td align="center">Medium</td>
-</tr>
-<tr>
-<td align="center">15</td>
-<td align="center">三数之和</td>
-<td align="center">go</td>
-<td align="center">Medium</td>
-</tr>
-<tr>
-<td align="center">16</td>
-<td align="center">最接近的三数之和</td>
-<td align="center">go</td>
-<td align="center">Medium</td>
-</tr>
-<tr>
-<td align="center">41</td>
-<td align="center">缺失一个正数</td>
-<td align="center">go</td>
-<td align="center">Hard</td>
-</tr>
-<tr>
-<td align="center">42</td>
-<td align="center">接雨水</td>
-<td align="center">go</td>
-<td align="center">Hard</td>
-</tr>
-<tr>
-<td align="center">48</td>
-<td align="center">旋转图像</td>
-<td align="center">go</td>
-<td align="center">medium</td>
-</tr>
-</tbody></table>
-</div>
+<span class="hljs-string">原地旋转输入矩阵，使其变为:</span>
+[
+  [<span class="hljs-number">7</span>,<span class="hljs-number">4</span>,<span class="hljs-number">1</span>],
+  [<span class="hljs-number">8</span>,<span class="hljs-number">5</span>,<span class="hljs-number">2</span>],
+  [<span class="hljs-number">9</span>,<span class="hljs-number">6</span>,<span class="hljs-number">3</span>]
+]</code></pre>
 
-<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><div style="font-size:20px">
+<p><strong>示例 2:</strong></p>
+<pre><code class="hljs yaml"><span class="hljs-string">给定</span> <span class="hljs-string">matrix</span> <span class="hljs-string">=</span>
+[
+  [ <span class="hljs-number">5</span>, <span class="hljs-number">1</span>, <span class="hljs-number">9</span>,<span class="hljs-number">11</span>],
+  [ <span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">8</span>,<span class="hljs-number">10</span>],
+  [<span class="hljs-number">13</span>, <span class="hljs-number">3</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>],
+  [<span class="hljs-number">15</span>,<span class="hljs-number">14</span>,<span class="hljs-number">12</span>,<span class="hljs-number">16</span>]
+]<span class="hljs-string">,</span> 
 
-<table>
-<thead>
-<tr>
-<th align="center">题号</th>
-<th align="center">题目</th>
-<th align="center">语言</th>
-<th>难易程度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">3</td>
-<td align="center">无重复字符的最长子串</td>
-<td align="center">go</td>
-<td>medium</td>
-</tr>
-</tbody></table>
-</div>
+<span class="hljs-string">原地旋转输入矩阵，使其变为:</span>
+[
+  [<span class="hljs-number">15</span>,<span class="hljs-number">13</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>],
+  [<span class="hljs-number">14</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">1</span>],
+  [<span class="hljs-number">12</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">9</span>],
+  [<span class="hljs-number">16</span>, <span class="hljs-number">7</span>,<span class="hljs-number">10</span>,<span class="hljs-number">11</span>]
+]</code></pre>
+
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>这题想清楚了不难，找找规律，就是<strong>矩阵转置</strong>再<strong>镜像翻转</strong>一下就得到结果</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">rotate</span><span class="hljs-params">(matrix [][]<span class="hljs-keyword">int</span>)</span></span>  &#123;
+    swap:=<span class="hljs-number">0</span>
+    a:=<span class="hljs-built_in">len</span>(matrix)
+     b:=<span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>])
+    <span class="hljs-comment">//下面是矩阵转置部分</span>
+    <span class="hljs-keyword">for</span> k:=a<span class="hljs-number">-1</span>;k&gt;<span class="hljs-number">0</span>;k--&#123;
+        <span class="hljs-keyword">for</span> i:=<span class="hljs-number">0</span>;i&lt;k;i++&#123;
+            swap=matrix[a-k<span class="hljs-number">-1</span>][a-i<span class="hljs-number">-1</span>]
+            matrix[a-k<span class="hljs-number">-1</span>][a-i<span class="hljs-number">-1</span>]=matrix[a-i<span class="hljs-number">-1</span>][a-k<span class="hljs-number">-1</span>]
+            matrix[a-i<span class="hljs-number">-1</span>][a-k<span class="hljs-number">-1</span>]=swap
+        &#125;
+    &#125;
+    <span class="hljs-comment">//下面是矩阵镜像翻转部分</span>
+    <span class="hljs-keyword">for</span> i:=<span class="hljs-number">0</span>;i&lt;a;i++&#123;
+        <span class="hljs-keyword">for</span> j:=<span class="hljs-number">1</span>;j&lt;=b/<span class="hljs-number">2</span>;j++&#123;
+            swap = matrix[i][j<span class="hljs-number">-1</span>]
+            matrix[i][j<span class="hljs-number">-1</span>] = matrix[i][b-j]
+            matrix[i][b-j] =swap
+        &#125;
+    &#125;
+&#125;</code></pre>
+
+<p class="note note-primary"; style="font-size:22px">
+   执行用时：0 ms, 在所有 Go 提交中击败了100.00%的用户<br>
+   内存消耗：2.2 MB, 在所有 Go 提交中击败了100.00%的用户
+</p>
+
+
+
+
+
+
             </div>
             <hr>
             <div>
@@ -336,18 +316,12 @@ table th:nth-of-type(3) {
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/01/25/%E5%8A%9B%E6%89%A3%E5%9B%9B%E5%8D%81%E5%85%AB%EF%BC%9A%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">力扣四十八：旋转图像</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/09/%E5%8A%9B%E6%89%A3%E5%9B%9B%E5%8D%81%E4%BA%8C%EF%BC%9A%E6%8E%A5%E9%9B%A8%E6%B0%B4/">
-                        <span class="hidden-mobile">力扣四十二：接雨水</span>
+                      <a href="/2021/01/10/%E5%88%86%E6%A8%A1%E5%9D%97%E5%88%B7%E5%8A%9B%E6%89%A3%E9%A2%98/">
+                        <span class="hidden-mobile">分模块刷力扣题</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -366,8 +340,8 @@ table th:nth-of-type(3) {
     <div id="disqus_thread"></div>
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'http://example.com/2021/01/10/%E5%88%86%E6%A8%A1%E5%9D%97%E5%88%B7%E5%8A%9B%E6%89%A3%E9%A2%98/';
-        this.page.identifier = '/2021/01/10/%E5%88%86%E6%A8%A1%E5%9D%97%E5%88%B7%E5%8A%9B%E6%89%A3%E9%A2%98/';
+        this.page.url = 'http://example.com/2021/01/25/%E5%8A%9B%E6%89%A3%E5%9B%9B%E5%8D%81%E5%85%AB%EF%BC%9A%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/';
+        this.page.identifier = '/2021/01/25/%E5%8A%9B%E6%89%A3%E5%9B%9B%E5%8D%81%E5%85%AB%EF%BC%9A%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/';
       };
       function loadDisqus() {
         (function () {
@@ -539,7 +513,7 @@ table th:nth-of-type(3) {
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "分模块刷力扣题&nbsp;",
+        "力扣四十八：旋转图像&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
