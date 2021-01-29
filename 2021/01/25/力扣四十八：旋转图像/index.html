@@ -162,7 +162,7 @@
 </nav>
 
     <div class="banner intro-2" id="background" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('/img/%E5%A3%81%E7%BA%B8.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -189,7 +189,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      358 字
+      364 字
     </span>
   
 
@@ -232,7 +232,8 @@
             <h1 style="display: none">力扣四十八：旋转图像</h1>
             
             <div class="markdown-body" id="post-body">
-              <h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>给定一个 <em>n</em> × <em>n</em> 的二维矩阵表示一个图像。</p>
+              <p><font size=6px>题目:旋转图像</font></p>
+<h4 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h4><p>给定一个 <em>n</em> × <em>n</em> 的二维矩阵表示一个图像。</p>
 <p>将图像顺时针旋转 90 度。</p>
 <p><strong>说明：</strong></p>
 <p>你必须在<strong>原地</strong>旋转图像，这意味着你需要直接修改输入的二维矩阵。<strong>请不要</strong>使用另一个矩阵来旋转图像。</p>
@@ -269,7 +270,7 @@
 ]</code></pre>
 
 <h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>这题想清楚了不难，找找规律，就是<strong>矩阵转置</strong>再<strong>镜像翻转</strong>一下就得到结果</p>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">rotate</span><span class="hljs-params">(matrix [][]<span class="hljs-keyword">int</span>)</span></span>  &#123;
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code class="hljs golang"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">rotate</span><span class="hljs-params">(matrix [][]<span class="hljs-keyword">int</span>)</span></span>  &#123;
     swap:=<span class="hljs-number">0</span>
     a:=<span class="hljs-built_in">len</span>(matrix)
      b:=<span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>])
@@ -306,6 +307,22 @@
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/">力扣刷题</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/golang/">golang</a>
+                    
+                      <a class="hover-with-bg" href="/tags/array/">array</a>
+                    
+                  </div>
                 
               </div>
               
@@ -315,6 +332,12 @@
                 <div class="post-prevnext row">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/01/27/%E5%8A%9B%E6%89%A3%E4%B8%89%EF%BC%9A%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%97%E4%B8%B2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">力扣三：无重复字字符的最长字串</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

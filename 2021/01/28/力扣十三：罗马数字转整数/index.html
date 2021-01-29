@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>力扣十五;三数之和 - My Story</title>
+  <title>力扣模板 - My Story</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -177,8 +177,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-01-04 15:03" pubdate>
-        2021年1月4日 下午
+      <time datetime="2021-01-28 10:49" pubdate>
+        2021年1月28日 上午
       </time>
     </span>
   
@@ -189,7 +189,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      476 字
+      659 字
     </span>
   
 
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      10
        分钟
     </span>
   
@@ -229,67 +229,79 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">力扣十五;三数之和</h1>
+            <h1 style="display: none">力扣模板</h1>
             
             <div class="markdown-body" id="post-body">
-              <h4 id="题目-三数之和"><a href="#题目-三数之和" class="headerlink" title="题目:三数之和"></a><font size=6px>题目:三数之和</font></h4><h4 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h4><p>难度中等</p>
-<p>给你一个包含 <em>n</em> 个整数的数组 <code>nums</code>，判断 <code>nums</code> 中是否存在三个元素 <em>a，b，c ，</em>使得 <em>a + b + c =</em> 0 ？请你找出所有满足条件且不重复的三元组。</p>
-<p><strong>注意：</strong>答案中不可以包含重复的三元组。</p>
-<p><strong>示例：</strong></p>
-<pre><code class="hljs lsl">给定数组 nums = [<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">-4</span>]，
-
-满足要求的三元组集合为：
-[
-  [<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>],
-  [<span class="hljs-number">-1</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">2</span>]
-]</code></pre>
-
-<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>​    先排序，再用for从0到length-2中选一个k值，选定k值之后把k后面的数用对撞指针从k+1到length-1用对撞指针求一个值等于-num[k]，记得判断left右边和right左边的值是否和自己相同</p>
-<p><strong>一直出现这个错误，检查之后发现最后少个大括号</strong></p>
-<p><code>Line 40: Char 6: syntax error: unexpected __helper__, expecting ( (solution.go)</code></p>
-<pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">threeSum</span><span class="hljs-params">(nums []<span class="hljs-keyword">int</span>)</span> [][]<span class="hljs-title">int</span></span> &#123;
-    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(nums)&lt;<span class="hljs-number">3</span>&#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
+              <h3 id="题目-罗马数字转整数"><a href="#题目-罗马数字转整数" class="headerlink" title="题目:罗马数字转整数"></a><font size=6px>题目:罗马数字转整数</font></h3><h4 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h4><p>罗马数字包含以下七种字符: I， V， X， L，C，D 和 M。</p>
+<p>字符          数值<br>I             1<br>V             5<br>X             10<br>L             50<br>C             100<br>D             500<br>M             1000<br>例如， 罗马数字 2 写做 II ，即为两个并列的 1。12 写做 XII ，即为 X + II 。 27 写做  XXVII, 即为 XX + V + II 。</p>
+<p>通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 IIII，而是 IV。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 IX。这个特殊的规则只适用于以下六种情况：</p>
+<p>I 可以放在 V (5) 和 X (10) 的左边，来表示 4 和 9。<br>X 可以放在 L (50) 和 C (100) 的左边，来表示 40 和 90。<br>C 可以放在 D (500) 和 M (1000) 的左边，来表示 400 和 900。<br>给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路:"></a>思路:</h4><p>​    一个难点如果小的数字出现在大的数字前面的时候，这个数字变成减而不是加上这个数字的大小，用switch写比较清楚。其他比较简单易理解。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h4><pre><code class="hljs golang"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">romanToInt</span><span class="hljs-params">(s <span class="hljs-keyword">string</span>)</span> <span class="hljs-title">int</span></span> &#123;
+    sum:=<span class="hljs-number">0</span>
+    len_s:=<span class="hljs-built_in">len</span>(s)
+    <span class="hljs-keyword">for</span> i:=<span class="hljs-number">0</span>;i&lt;len_s;i++&#123;
+        <span class="hljs-keyword">switch</span> s[i]&#123;
+           <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;I&#x27;</span>: 
+                sum++
+                <span class="hljs-keyword">if</span> i+<span class="hljs-number">1</span>&lt;len_s&#123;
+                    <span class="hljs-keyword">if</span> s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;V&#x27;</span>|| s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;X&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;L&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;L&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;C&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;D&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;M&#x27;</span>&#123;
+                        sum=sum<span class="hljs-number">-2</span>
+                    &#125;
+                &#125;
+                <span class="hljs-keyword">break</span>
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;V&#x27;</span>:
+                sum+=<span class="hljs-number">5</span>
+                <span class="hljs-keyword">if</span> i+<span class="hljs-number">1</span>&lt;len_s&#123;
+                    <span class="hljs-keyword">if</span> s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;V&#x27;</span>|| s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;X&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;L&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;C&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;D&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;M&#x27;</span>&#123;
+                        sum=sum<span class="hljs-number">-2</span>
+                    &#125;
+                &#125;
+                <span class="hljs-keyword">break</span>
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;X&#x27;</span>:
+                sum+=<span class="hljs-number">10</span>
+                <span class="hljs-keyword">if</span> i+<span class="hljs-number">1</span>&lt;len_s&#123;
+                    <span class="hljs-keyword">if</span> s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;L&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;C&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;D&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;M&#x27;</span>&#123;
+                        sum=sum<span class="hljs-number">-20</span>
+                    &#125;
+                &#125;
+                <span class="hljs-keyword">break</span>
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;L&#x27;</span>:
+                sum+=<span class="hljs-number">50</span>
+                <span class="hljs-keyword">if</span> i+<span class="hljs-number">1</span>&lt;len_s&#123;
+                    <span class="hljs-keyword">if</span> s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;C&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;D&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;M&#x27;</span>&#123;
+                        sum=sum<span class="hljs-number">-100</span>
+                    &#125;
+                &#125;
+                <span class="hljs-keyword">break</span>
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;C&#x27;</span>:
+                sum+=<span class="hljs-number">100</span>
+                <span class="hljs-keyword">if</span> i+<span class="hljs-number">1</span>&lt;len_s&#123;
+                    <span class="hljs-keyword">if</span> s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;D&#x27;</span>||s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;M&#x27;</span>&#123;
+                        sum=sum<span class="hljs-number">-200</span>
+                    &#125;
+                &#125;
+                <span class="hljs-keyword">break</span>
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;D&#x27;</span>:
+                sum+=<span class="hljs-number">500</span>
+                <span class="hljs-keyword">if</span> i+<span class="hljs-number">1</span>&lt;len_s&#123;
+                    <span class="hljs-keyword">if</span> s[i+<span class="hljs-number">1</span>]==<span class="hljs-string">&#x27;M&#x27;</span>&#123;
+                        sum=sum<span class="hljs-number">-1000</span>
+                    &#125;
+                &#125;
+                <span class="hljs-keyword">break</span>
+            <span class="hljs-keyword">case</span> <span class="hljs-string">&#x27;M&#x27;</span>:
+                sum+=<span class="hljs-number">1000</span>
+                <span class="hljs-keyword">break</span> 
+        &#125;
     &#125;
-    <span class="hljs-comment">//先排序</span>
-    sort.Ints(nums)
-    length:=<span class="hljs-built_in">len</span>(nums)
-    <span class="hljs-keyword">var</span> res [][]<span class="hljs-keyword">int</span>
-    <span class="hljs-comment">//确认好一个数之后用对撞指针</span>
-     <span class="hljs-keyword">for</span> k:=<span class="hljs-number">0</span>;k&lt;length<span class="hljs-number">-2</span>;k++&#123;
-        <span class="hljs-keyword">if</span> nums[k]&gt;<span class="hljs-number">0</span> &#123;
-            <span class="hljs-keyword">break</span>
-        &#125;
-        <span class="hljs-keyword">if</span> k&gt;<span class="hljs-number">0</span>&amp;&amp;nums[k]==nums[k<span class="hljs-number">-1</span>]&#123;
-            <span class="hljs-keyword">continue</span>
-        &#125;
-        left:=k+<span class="hljs-number">1</span>
-        right:=length<span class="hljs-number">-1</span>
-        <span class="hljs-keyword">for</span> left&lt;right&#123;
-            sum := nums[left]+nums[right]+nums[k]
-            <span class="hljs-comment">//要判断left和它右边的值一不一样，right的值和它左边的一不一样</span>
-            <span class="hljs-keyword">if</span> sum&gt;<span class="hljs-number">0</span>&#123;
-                <span class="hljs-keyword">for</span> right=right<span class="hljs-number">-1</span>;right&gt;left &amp;&amp;nums[right]==nums[right+<span class="hljs-number">1</span>];right-- &#123;&#125;
-            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> sum&lt;<span class="hljs-number">0</span> &#123;
-                <span class="hljs-keyword">for</span> left=left+<span class="hljs-number">1</span>;right&gt;left &amp;&amp;nums[left]==nums[left<span class="hljs-number">-1</span>];left++ &#123;&#125;
-            &#125;<span class="hljs-keyword">else</span>&#123;
-                res = <span class="hljs-built_in">append</span>(res,[]<span class="hljs-keyword">int</span>&#123;nums[k],nums[left],nums[right]&#125;)
-                <span class="hljs-keyword">for</span> right=right<span class="hljs-number">-1</span>;right&gt;left &amp;&amp;nums[right]==nums[right+<span class="hljs-number">1</span>];right-- &#123;&#125;
-                <span class="hljs-keyword">for</span> left=left+<span class="hljs-number">1</span>;right&gt;left &amp;&amp;nums[left]==nums[left<span class="hljs-number">-1</span>];left++ &#123;&#125;         
-            &#125;
-        &#125;
-    &#125;
-    <span class="hljs-keyword">return</span> res
+    <span class="hljs-keyword">return</span> sum
 &#125;</code></pre>
 
 <h4 id="代码效率："><a href="#代码效率：" class="headerlink" title="代码效率："></a>代码效率：</h4><p class="note note-primary"; style="font-size:22px">
-   执行用时：40 ms, 在所有 Go 提交中击败了52.12%的用户<br>
-   内存消耗：7.3 MB, 在所有 Go 提交中击败了42.04%的用户
+   执行用时：12 ms, 在所有 Go 提交中击败了47.27%的用户<br>
+   内存消耗：3.1 MB, 在所有 Go 提交中击败了99.24%的用户
 </p>
-
-
-
-
 
 
             </div>
@@ -310,7 +322,7 @@
                     
                       <a class="hover-with-bg" href="/tags/golang/">golang</a>
                     
-                      <a class="hover-with-bg" href="/tags/array/">array</a>
+                      <a class="hover-with-bg" href="/tags/string/">string</a>
                     
                   </div>
                 
@@ -323,18 +335,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/01/05/%E5%8A%9B%E6%89%A3%E5%8D%81%E5%85%AD%20%E6%9C%80%E6%8E%A5%E8%BF%91%E7%9A%84%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">力扣十六 最接近的三数之和</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/12/30/%E5%8A%9B%E6%89%A3%E5%8D%81%E4%B8%80;%E4%B9%98%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/">
-                        <span class="hidden-mobile">力扣十一;乘最多水的容器</span>
+                      <a href="/2021/01/27/%E5%8A%9B%E6%89%A3%E4%B8%89%EF%BC%9A%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%97%E4%B8%B2/">
+                        <span class="hidden-mobile">力扣三：无重复字字符的最长字串</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -353,8 +359,8 @@
     <div id="disqus_thread"></div>
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'http://example.com/2021/01/04/%E5%8A%9B%E6%89%A3%E5%8D%81%E4%BA%94;%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/';
-        this.page.identifier = '/2021/01/04/%E5%8A%9B%E6%89%A3%E5%8D%81%E4%BA%94;%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/';
+        this.page.url = 'http://example.com/2021/01/28/%E5%8A%9B%E6%89%A3%E5%8D%81%E4%B8%89%EF%BC%9A%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/';
+        this.page.identifier = '/2021/01/28/%E5%8A%9B%E6%89%A3%E5%8D%81%E4%B8%89%EF%BC%9A%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/';
       };
       function loadDisqus() {
         (function () {
@@ -526,7 +532,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "力扣十五;三数之和&nbsp;",
+        "力扣模板&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,

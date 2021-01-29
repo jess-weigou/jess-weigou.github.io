@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>力扣十五;三数之和 - My Story</title>
+  <title>力扣三：无重复字字符的最长字串 - My Story</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -177,8 +177,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-01-04 15:03" pubdate>
-        2021年1月4日 下午
+      <time datetime="2021-01-27 11:43" pubdate>
+        2021年1月27日 中午
       </time>
     </span>
   
@@ -189,7 +189,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      476 字
+      433 字
     </span>
   
 
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      5
        分钟
     </span>
   
@@ -229,67 +229,64 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">力扣十五;三数之和</h1>
+            <h1 style="display: none">力扣三：无重复字字符的最长字串</h1>
             
             <div class="markdown-body" id="post-body">
-              <h4 id="题目-三数之和"><a href="#题目-三数之和" class="headerlink" title="题目:三数之和"></a><font size=6px>题目:三数之和</font></h4><h4 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h4><p>难度中等</p>
-<p>给你一个包含 <em>n</em> 个整数的数组 <code>nums</code>，判断 <code>nums</code> 中是否存在三个元素 <em>a，b，c ，</em>使得 <em>a + b + c =</em> 0 ？请你找出所有满足条件且不重复的三元组。</p>
-<p><strong>注意：</strong>答案中不可以包含重复的三元组。</p>
-<p><strong>示例：</strong></p>
-<pre><code class="hljs lsl">给定数组 nums = [<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">-4</span>]，
+              <p><font size=6px>题目:无重复字字符的最长字串</font></p>
+<h4 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h4><p>给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。</p>
+<p>示例 1:</p>
+<p>输入: s = “abcabcbb”<br>输出: 3<br>解释: 因为无重复字符的最长子串是 “abc”，所以其长度为 3。<br>示例 2:</p>
+<p>输入: s = “bbbbb”<br>输出: 1<br>解释: 因为无重复字符的最长子串是 “b”，所以其长度为 1。<br>示例 3:</p>
+<p>输入: s = “pwwkew”<br>输出: 3<br>解释: 因为无重复字符的最长子串是 “wke”，所以其长度为 3。<br>     请注意，你的答案必须是 子串 的长度，”pwke” 是一个子序列，不是子串。<br>示例 4:</p>
+<p>输入: s = “”<br>输出: 0</p>
+<p>提示：</p>
+<p>0 &lt;= s.length &lt;= 5 * 104<br>s 由英文字母、数字、符号和空格组成</p>
+<h4 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h4><p>用滑动窗口法，设置一个数组，初始为0，再初设一个left和right，如果一个字母没有用过就把它</p>
+<p>*<em>```**</em>freq[s[right+1]-‘a’]++*</p>
+<p>，并且往右边划，如果在往右边划的时候遇到一个用到过的字母，就left++，把left上面的字母的频率减1，</p>
+<p>```freq[s[left]-‘a’]–</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre><code class="hljs golang"><span class="hljs-comment">//用滑动窗口法</span>
 
-满足要求的三元组集合为：
-[
-  [<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>],
-  [<span class="hljs-number">-1</span>, <span class="hljs-number">-1</span>, <span class="hljs-number">2</span>]
-]</code></pre>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">lengthOfLongestSubstring</span><span class="hljs-params">(s <span class="hljs-keyword">string</span>)</span> <span class="hljs-title">int</span></span> &#123;
 
-<h4 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h4><p>​    先排序，再用for从0到length-2中选一个k值，选定k值之后把k后面的数用对撞指针从k+1到length-1用对撞指针求一个值等于-num[k]，记得判断left右边和right左边的值是否和自己相同</p>
-<p><strong>一直出现这个错误，检查之后发现最后少个大括号</strong></p>
-<p><code>Line 40: Char 6: syntax error: unexpected __helper__, expecting ( (solution.go)</code></p>
-<pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">threeSum</span><span class="hljs-params">(nums []<span class="hljs-keyword">int</span>)</span> [][]<span class="hljs-title">int</span></span> &#123;
-    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(nums)&lt;<span class="hljs-number">3</span>&#123;
-        <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span>
-    &#125;
-    <span class="hljs-comment">//先排序</span>
-    sort.Ints(nums)
-    length:=<span class="hljs-built_in">len</span>(nums)
-    <span class="hljs-keyword">var</span> res [][]<span class="hljs-keyword">int</span>
-    <span class="hljs-comment">//确认好一个数之后用对撞指针</span>
-     <span class="hljs-keyword">for</span> k:=<span class="hljs-number">0</span>;k&lt;length<span class="hljs-number">-2</span>;k++&#123;
-        <span class="hljs-keyword">if</span> nums[k]&gt;<span class="hljs-number">0</span> &#123;
-            <span class="hljs-keyword">break</span>
-        &#125;
-        <span class="hljs-keyword">if</span> k&gt;<span class="hljs-number">0</span>&amp;&amp;nums[k]==nums[k<span class="hljs-number">-1</span>]&#123;
-            <span class="hljs-keyword">continue</span>
-        &#125;
-        left:=k+<span class="hljs-number">1</span>
-        right:=length<span class="hljs-number">-1</span>
-        <span class="hljs-keyword">for</span> left&lt;right&#123;
-            sum := nums[left]+nums[right]+nums[k]
-            <span class="hljs-comment">//要判断left和它右边的值一不一样，right的值和它左边的一不一样</span>
-            <span class="hljs-keyword">if</span> sum&gt;<span class="hljs-number">0</span>&#123;
-                <span class="hljs-keyword">for</span> right=right<span class="hljs-number">-1</span>;right&gt;left &amp;&amp;nums[right]==nums[right+<span class="hljs-number">1</span>];right-- &#123;&#125;
-            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> sum&lt;<span class="hljs-number">0</span> &#123;
-                <span class="hljs-keyword">for</span> left=left+<span class="hljs-number">1</span>;right&gt;left &amp;&amp;nums[left]==nums[left<span class="hljs-number">-1</span>];left++ &#123;&#125;
-            &#125;<span class="hljs-keyword">else</span>&#123;
-                res = <span class="hljs-built_in">append</span>(res,[]<span class="hljs-keyword">int</span>&#123;nums[k],nums[left],nums[right]&#125;)
-                <span class="hljs-keyword">for</span> right=right<span class="hljs-number">-1</span>;right&gt;left &amp;&amp;nums[right]==nums[right+<span class="hljs-number">1</span>];right-- &#123;&#125;
-                <span class="hljs-keyword">for</span> left=left+<span class="hljs-number">1</span>;right&gt;left &amp;&amp;nums[left]==nums[left<span class="hljs-number">-1</span>];left++ &#123;&#125;         
-            &#125;
-        &#125;
-    &#125;
-    <span class="hljs-keyword">return</span> res
+  left,right,max:=<span class="hljs-number">0</span>,<span class="hljs-number">-1</span>,<span class="hljs-number">0</span>
+
+  <span class="hljs-keyword">var</span> freq[<span class="hljs-number">256</span>] <span class="hljs-keyword">int</span>
+
+  <span class="hljs-keyword">for</span> left&lt;<span class="hljs-built_in">len</span>(s)&#123;
+
+​    <span class="hljs-comment">//go语言很严格，单个字符不能用“a”</span>
+
+​    <span class="hljs-keyword">if</span> right+<span class="hljs-number">1</span>&lt;<span class="hljs-built_in">len</span>(s)&amp;&amp;freq[s[right+<span class="hljs-number">1</span>]-<span class="hljs-string">&#x27;a&#x27;</span>]==<span class="hljs-number">0</span>&#123;
+
+​      freq[s[right+<span class="hljs-number">1</span>]-<span class="hljs-string">&#x27;a&#x27;</span>]++
+
+​      right++
+
+​    &#125;<span class="hljs-keyword">else</span>&#123;
+
+​      freq[s[left]-<span class="hljs-string">&#x27;a&#x27;</span>]--
+
+​      left++
+
+​    &#125;
+
+​    <span class="hljs-keyword">if</span> max&lt;right-left+<span class="hljs-number">1</span>&#123;
+
+​      max=right-left+<span class="hljs-number">1</span>
+
+​    &#125;
+
+  &#125;
+
+  <span class="hljs-keyword">return</span> max
+
 &#125;</code></pre>
 
 <h4 id="代码效率："><a href="#代码效率：" class="headerlink" title="代码效率："></a>代码效率：</h4><p class="note note-primary"; style="font-size:22px">
-   执行用时：40 ms, 在所有 Go 提交中击败了52.12%的用户<br>
-   内存消耗：7.3 MB, 在所有 Go 提交中击败了42.04%的用户
+   执行用时：0 ms, 在所有 Go 提交中击败了100.00%的用户<br>
+   内存消耗：2.5 MB, 在所有 Go 提交中击败了100.00%的用户
 </p>
-
-
-
-
 
 
             </div>
@@ -310,7 +307,7 @@
                     
                       <a class="hover-with-bg" href="/tags/golang/">golang</a>
                     
-                      <a class="hover-with-bg" href="/tags/array/">array</a>
+                      <a class="hover-with-bg" href="/tags/string/">string</a>
                     
                   </div>
                 
@@ -323,9 +320,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/01/05/%E5%8A%9B%E6%89%A3%E5%8D%81%E5%85%AD%20%E6%9C%80%E6%8E%A5%E8%BF%91%E7%9A%84%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/">
+                      <a href="/2021/01/28/%E5%8A%9B%E6%89%A3%E5%8D%81%E4%B8%89%EF%BC%9A%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97%E8%BD%AC%E6%95%B4%E6%95%B0/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">力扣十六 最接近的三数之和</span>
+                        <span class="hidden-mobile">力扣模板</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -333,8 +330,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2020/12/30/%E5%8A%9B%E6%89%A3%E5%8D%81%E4%B8%80;%E4%B9%98%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/">
-                        <span class="hidden-mobile">力扣十一;乘最多水的容器</span>
+                      <a href="/2021/01/25/%E5%8A%9B%E6%89%A3%E5%9B%9B%E5%8D%81%E5%85%AB%EF%BC%9A%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/">
+                        <span class="hidden-mobile">力扣四十八：旋转图像</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -353,8 +350,8 @@
     <div id="disqus_thread"></div>
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'http://example.com/2021/01/04/%E5%8A%9B%E6%89%A3%E5%8D%81%E4%BA%94;%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/';
-        this.page.identifier = '/2021/01/04/%E5%8A%9B%E6%89%A3%E5%8D%81%E4%BA%94;%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C/';
+        this.page.url = 'http://example.com/2021/01/27/%E5%8A%9B%E6%89%A3%E4%B8%89%EF%BC%9A%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%97%E4%B8%B2/';
+        this.page.identifier = '/2021/01/27/%E5%8A%9B%E6%89%A3%E4%B8%89%EF%BC%9A%E6%97%A0%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%97%E4%B8%B2/';
       };
       function loadDisqus() {
         (function () {
@@ -526,7 +523,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "力扣十五;三数之和&nbsp;",
+        "力扣三：无重复字字符的最长字串&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
