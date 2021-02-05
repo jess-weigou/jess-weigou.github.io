@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  <title>力扣九十三：复原IP地址 - My Story</title>
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.staticfile.org/highlight.js/10.0.0/styles/github-gist.min.css" />
+    
+  
+
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner intro-2" id="background" parallax=true
+         style="background: url('/img/%E5%A3%81%E7%BA%B8.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="container page-header text-center fade-in-up">
+            <span class="h2" id="subtitle">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-02 12:47" pubdate>
+        2021年2月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      870 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="container nopadding-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto" id="post">
+            <!-- SEO header -->
+            <h1 style="display: none">力扣九十三：复原IP地址</h1>
+            
+            <div class="markdown-body" id="post-body">
+              <h3 id="复原IP地址"><a href="#复原IP地址" class="headerlink" title="复原IP地址"></a><font size=6px>复原IP地址</font></h3><h4 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h4><p>给定一个只包含数字的字符串，复原它并返回所有可能的 IP 地址格式。</p>
+<p>有效的 IP 地址 正好由四个整数（每个整数位于 0 到 255 之间组成，且不能含有前导 0），整数之间用 ‘.’ 分隔。</p>
+<p>例如：”0.1.2.201” 和 “192.168.1.1” 是 有效的 IP 地址，但是 “0.011.255.245”、”192.168.1.312” 和 “<a href="mailto:&#x31;&#57;&#50;&#x2e;&#x31;&#x36;&#x38;&#x40;&#49;&#x2e;&#x31;">&#x31;&#57;&#50;&#x2e;&#x31;&#x36;&#x38;&#x40;&#49;&#x2e;&#x31;</a>“ 是 无效的 IP 地址。</p>
+<p>示例 1：</p>
+<p>输入：s = “25525511135”<br>输出：[“255.255.11.135”,”255.255.111.35”]<br>示例 2：</p>
+<p>输入：s = “0000”<br>输出：[“0.0.0.0”]<br>示例 3：</p>
+<p>输入：s = “1111”<br>输出：[“1.1.1.1”]<br>示例 4：</p>
+<p>输入：s = “010010”<br>输出：[“0.10.0.10”,”0.100.1.0”]<br>示例 5：</p>
+<p>输入：s = “101023”<br>输出：[“1.0.10.23”,”1.0.102.3”,”10.1.0.23”,”10.10.2.3”,”101.0.2.3”]</p>
+<p>提示：</p>
+<p>0 &lt;= s.length &lt;= 3000<br>s 仅由数字组成</p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路:"></a>思路:</h4><h5 id="学到的东西"><a href="#学到的东西" class="headerlink" title="学到的东西"></a>学到的东西</h5><p>1、搞清楚了切片和数组的区别，切片要导入的话得用append，没有大小限制</p>
+<p>2、s[i]-‘0’出来的结果是byte类型的</p>
+<p>3、要重置一个字符串型的变量，var一个新的string变量，然后要它等于新的string变量</p>
+<p>4、要返回一个空的字符串切片，return []string{}</p>
+<p>5、要用len求数字的长度，要用strconv.Itoa把数字转化成字符串才能求</p>
+<p>思路：</p>
+<p>第一步先求长度符不符合标准，第二步求有无非法字符，第三步开始正式处理，这道题好像是一串数字，在里面加上3个点，然后判断被三个点隔开的4个数字符不符合标准，把4个数字取出来，然后分别判断是否小于255，然后判断这4个数字的长度和s的长度一不一样，如果不一样说明数字前面有0，就不符合条件</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h4><pre><code class="hljs golang"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;strconv&quot;</span>
+<span class="hljs-keyword">var</span> s_len <span class="hljs-keyword">int</span>
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">restoreIpAddresses</span><span class="hljs-params">(s <span class="hljs-keyword">string</span>)</span> []<span class="hljs-title">string</span></span> &#123;
+    <span class="hljs-keyword">var</span> s1 ,s3 <span class="hljs-keyword">string</span>
+    <span class="hljs-keyword">var</span> s2 []<span class="hljs-keyword">string</span>
+    <span class="hljs-keyword">var</span> n1,n2,n3,n4,sum_len <span class="hljs-keyword">int</span>
+    s_len=<span class="hljs-built_in">len</span>(s)
+    <span class="hljs-comment">//如果长度不达标</span>
+    <span class="hljs-keyword">if</span> s_len&lt;<span class="hljs-number">4</span> || s_len&gt;<span class="hljs-number">12</span>&#123;
+        <span class="hljs-keyword">return</span> []<span class="hljs-keyword">string</span>&#123;&#125;
+    &#125;
+    <span class="hljs-comment">//如果出现非法字符</span>
+    <span class="hljs-keyword">for</span> i:=<span class="hljs-number">0</span>;i&lt;s_len;i++&#123;
+        <span class="hljs-keyword">if</span> s[i]&lt;<span class="hljs-string">&#x27;0&#x27;</span> || s[i]&gt;<span class="hljs-string">&#x27;9&#x27;</span>&#123;
+            <span class="hljs-keyword">return</span> []<span class="hljs-keyword">string</span>&#123;&#125;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">for</span> i:=<span class="hljs-number">0</span>;i&lt;s_len<span class="hljs-number">-3</span>&amp;&amp;i&lt;=<span class="hljs-number">2</span>;i++&#123;
+        <span class="hljs-keyword">for</span> j:=i+<span class="hljs-number">1</span>;j&lt;s_len<span class="hljs-number">-2</span>&amp;&amp;j-i&lt;=<span class="hljs-number">3</span>;j++&#123;
+            <span class="hljs-keyword">for</span> k:=j+<span class="hljs-number">1</span>;k&lt;s_len<span class="hljs-number">-1</span>&amp;&amp;k-j&lt;=<span class="hljs-number">3</span>;k++&#123;
+                n1,n2,n3,n4,sum_len=stio(s,i,j,k)
+                <span class="hljs-keyword">if</span> n1&lt;=<span class="hljs-number">255</span>&amp;&amp;n2&lt;=<span class="hljs-number">255</span>&amp;&amp;n3&lt;=<span class="hljs-number">255</span>&amp;&amp;n4&lt;=<span class="hljs-number">255</span>&amp;&amp;sum_len==s_len&#123;
+                    <span class="hljs-keyword">for</span> m:=<span class="hljs-number">0</span>;m&lt;s_len;m++&#123;
+                        s1=s1+<span class="hljs-keyword">string</span>(s[m])
+                        <span class="hljs-keyword">if</span> m==i||m==j||m==k&#123;
+                            s1=s1+<span class="hljs-string">&quot;.&quot;</span>
+                        &#125;
+                    &#125;
+                    s2=<span class="hljs-built_in">append</span>(s2,s1)
+                    <span class="hljs-comment">//重置s1</span>
+                    s1=s3
+                &#125;
+                n1,n2,n3=<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>
+
+            &#125;
+        &#125;
+    &#125;
+    <span class="hljs-keyword">return</span> s2
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">stio</span><span class="hljs-params">(s <span class="hljs-keyword">string</span>,a <span class="hljs-keyword">int</span>,b <span class="hljs-keyword">int</span> ,c <span class="hljs-keyword">int</span>)</span> <span class="hljs-params">(<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>)</span></span> &#123;
+    <span class="hljs-keyword">var</span> n1,n2,n3,n4 <span class="hljs-keyword">int</span>
+    <span class="hljs-keyword">var</span> sum_len <span class="hljs-keyword">int</span>
+    <span class="hljs-keyword">for</span> i:=<span class="hljs-number">0</span>;i&lt;=a;i++&#123;
+        n1=n1*<span class="hljs-number">10</span>+<span class="hljs-keyword">int</span>(s[i]-<span class="hljs-string">&#x27;0&#x27;</span>)
+    &#125;
+    <span class="hljs-keyword">for</span> i:=a+<span class="hljs-number">1</span>;i&lt;=b;i++&#123;
+        n2=n2*<span class="hljs-number">10</span>+<span class="hljs-keyword">int</span>(s[i]-<span class="hljs-string">&#x27;0&#x27;</span>)
+    &#125;
+    <span class="hljs-keyword">for</span> i:=b+<span class="hljs-number">1</span>;i&lt;=c;i++&#123;
+        n3=n3*<span class="hljs-number">10</span>+<span class="hljs-keyword">int</span>(s[i]-<span class="hljs-string">&#x27;0&#x27;</span>)
+    &#125;
+    <span class="hljs-keyword">for</span> i:=c+<span class="hljs-number">1</span>;i&lt;s_len;i++&#123;
+        n4=n4*<span class="hljs-number">10</span>+<span class="hljs-keyword">int</span>(s[i]-<span class="hljs-string">&#x27;0&#x27;</span>)
+    &#125;
+    
+    sum_len=<span class="hljs-built_in">len</span>(strconv.Itoa(n1))+<span class="hljs-built_in">len</span>(strconv.Itoa(n2))+<span class="hljs-built_in">len</span>(strconv.Itoa(n3))+<span class="hljs-built_in">len</span>(strconv.Itoa(n4))
+    <span class="hljs-keyword">return</span> n1,n2,n3,n4,sum_len
+&#125;</code></pre>
+
+<h4 id="代码效率："><a href="#代码效率：" class="headerlink" title="代码效率："></a>代码效率：</h4><p class="note note-primary"; style="font-size:22px">
+   执行用时：0 ms, 在所有 Go 提交中击败了100.00%的用户<br>
+   内存消耗：2.1 MB, 在所有 Go 提交中击败了56.25%的用户
+</p>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/">力扣刷题</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/golang/">golang</a>
+                    
+                      <a class="hover-with-bg" href="/tags/string/">string</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext row">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/30/%E5%8A%9B%E6%89%A3/%E5%8A%9B%E6%89%A3%E4%BA%8C%E5%8D%81%EF%BC%9A%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/">
+                        <span class="hidden-mobile">力扣二十：有效的括号</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://example.com/2021/02/02/%E5%8A%9B%E6%89%A3/%E5%8A%9B%E6%89%A3%E4%B9%9D%E5%8D%81%E4%B8%89%EF%BC%9A%E5%A4%8D%E5%8E%9FIP%E5%9C%B0%E5%9D%80/';
+        this.page.identifier = '/2021/02/02/%E5%8A%9B%E6%89%A3/%E5%8A%9B%E6%89%A3%E4%B9%9D%E5%8D%81%E4%B8%89%EF%BC%9A%E5%A4%8D%E5%8E%9FIP%E5%9C%B0%E5%9D%80/';
+      };
+      function loadDisqus() {
+        (function () {
+          var d = document,
+            s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      }
+      waitElementVisible('disqus_thread', loadDisqus);
+    </script>
+    <noscript>Please enable JavaScript to view the
+      <a target="_blank" href="https://disqus.com/?ref_noscript" rel="nofollow noopener noopener">comments powered by Disqus.</a>
+    </noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div id="tocbot"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+  </main>
+
+  
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
+  
+
+  
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+
+  
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+<script  src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js" ></script>
+<script  src="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/main.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script defer src="https://cdn.staticfile.org/clipboard.js/2.0.6/clipboard.min.js" ></script>
+  <script  src="/js/clipboard-use.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+  <script  src="https://cdn.staticfile.org/tocbot/4.11.1/tocbot.min.js" ></script>
+  <script>
+    $(document).ready(function () {
+      var boardCtn = $('#board-ctn');
+      var boardTop = boardCtn.offset().top;
+
+      tocbot.init({
+        tocSelector: '#tocbot',
+        contentSelector: '#post-body',
+        headingSelector: 'h1,h2,h3,h4,h5,h6',
+        linkClass: 'tocbot-link',
+        activeLinkClass: 'tocbot-active-link',
+        listClass: 'tocbot-list',
+        isCollapsedClass: 'tocbot-is-collapsed',
+        collapsibleClass: 'tocbot-is-collapsible',
+        collapseDepth: 0,
+        scrollSmooth: true,
+        headingsOffset: -boardTop
+      });
+      if ($('.toc-list-item').length > 0) {
+        $('#toc').css('visibility', 'visible');
+      }
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/typed.js/2.0.11/typed.min.js" ></script>
+  <script>
+    var typed = new Typed('#subtitle', {
+      strings: [
+        '  ',
+        "力扣九十三：复原IP地址&nbsp;",
+      ],
+      cursorChar: "_",
+      typeSpeed: 70,
+      loop: false,
+    });
+    typed.stop();
+    $(document).ready(function () {
+      $(".typed-cursor").addClass("h2");
+      typed.start();
+    });
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/anchor-js/4.2.2/anchor.min.js" ></script>
+  <script>
+    anchors.options = {
+      placement: "right",
+      visible: "hover",
+      
+    };
+    var el = "h1,h2,h3,h4,h5,h6".split(",");
+    var res = [];
+    for (item of el) {
+      res.push(".markdown-body > " + item)
+    }
+    anchors.add(res.join(", "))
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    var path = "/local-search.xml";
+    var inputArea = document.querySelector("#local-search-input");
+    inputArea.onclick = function () {
+      searchFunc(path, 'local-search-input', 'local-search-result');
+      this.onclick = null
+    }
+  </script>
+
+
+
+  <script  src="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.staticfile.org/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <script>
+    $('#post img:not(.no-zoom img, img[no-zoom]), img[zoom]').each(
+      function () {
+        var element = document.createElement('a');
+        $(element).attr('data-fancybox', 'images');
+        $(element).attr('href', $(this).attr('src'));
+        $(this).wrap(element);
+      }
+    );
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
