@@ -17,7 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
-  <title>力扣九十三：复原IP地址 - My Story</title>
+  <title>1003 我要通过 - My Story</title>
 
   <link  rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.4.1/css/bootstrap.min.css" />
 
@@ -177,8 +177,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-02-02 12:47" pubdate>
-        2021年2月2日 下午
+      <time datetime="2021-02-07 16:43" pubdate>
+        2021年2月7日 下午
       </time>
     </span>
   
@@ -189,7 +189,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      870 字
+      661 字
     </span>
   
 
@@ -199,7 +199,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      8
        分钟
     </span>
   
@@ -229,90 +229,88 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto" id="post">
             <!-- SEO header -->
-            <h1 style="display: none">力扣九十三：复原IP地址</h1>
+            <h1 style="display: none">1003 我要通过</h1>
             
             <div class="markdown-body" id="post-body">
-              <h3 id="复原IP地址"><a href="#复原IP地址" class="headerlink" title="复原IP地址"></a><font size=6px>复原IP地址</font></h3><h4 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h4><p>给定一个只包含数字的字符串，复原它并返回所有可能的 IP 地址格式。</p>
-<p>有效的 IP 地址 正好由四个整数（每个整数位于 0 到 255 之间组成，且不能含有前导 0），整数之间用 ‘.’ 分隔。</p>
-<p>例如：”0.1.2.201” 和 “192.168.1.1” 是 有效的 IP 地址，但是 “0.011.255.245”、”192.168.1.312” 和 “<a href="mailto:&#49;&#x39;&#50;&#46;&#x31;&#54;&#56;&#x40;&#x31;&#46;&#x31;">&#49;&#x39;&#50;&#46;&#x31;&#54;&#56;&#x40;&#x31;&#46;&#x31;</a>“ 是 无效的 IP 地址。</p>
-<p>示例 1：</p>
-<p>输入：s = “25525511135”<br>输出：[“255.255.11.135”,”255.255.111.35”]<br>示例 2：</p>
-<p>输入：s = “0000”<br>输出：[“0.0.0.0”]<br>示例 3：</p>
-<p>输入：s = “1111”<br>输出：[“1.1.1.1”]<br>示例 4：</p>
-<p>输入：s = “010010”<br>输出：[“0.10.0.10”,”0.100.1.0”]<br>示例 5：</p>
-<p>输入：s = “101023”<br>输出：[“1.0.10.23”,”1.0.102.3”,”10.1.0.23”,”10.10.2.3”,”101.0.2.3”]</p>
-<p>提示：</p>
-<p>0 &lt;= s.length &lt;= 3000<br>s 仅由数字组成</p>
-<h4 id="思路"><a href="#思路" class="headerlink" title="思路:"></a>思路:</h4><h5 id="学到的东西"><a href="#学到的东西" class="headerlink" title="学到的东西"></a>学到的东西</h5><p>1、搞清楚了切片和数组的区别，切片要导入的话得用append，没有大小限制</p>
-<p>2、s[i]-‘0’出来的结果是byte类型的</p>
-<p>3、要重置一个字符串型的变量，var一个新的string变量，然后要它等于新的string变量</p>
-<p>4、要返回一个空的字符串切片，return []string{}</p>
-<p>5、要用len求数字的长度，要用strconv.Itoa把数字转化成字符串才能求</p>
-<p>思路：</p>
-<p>第一步先求长度符不符合标准，第二步求有无非法字符，第三步开始正式处理，这道题好像是一串数字，在里面加上3个点，然后判断被三个点隔开的4个数字符不符合标准，把4个数字取出来，然后分别判断是否小于255，然后判断这4个数字的长度和s的长度一不一样，如果不一样说明数字前面有0，就不符合条件</p>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h4><pre><code class="hljs golang"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;strconv&quot;</span>
-<span class="hljs-keyword">var</span> s_len <span class="hljs-keyword">int</span>
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">restoreIpAddresses</span><span class="hljs-params">(s <span class="hljs-keyword">string</span>)</span> []<span class="hljs-title">string</span></span> &#123;
-    <span class="hljs-keyword">var</span> s1 ,s3 <span class="hljs-keyword">string</span>
-    <span class="hljs-keyword">var</span> s2 []<span class="hljs-keyword">string</span>
-    <span class="hljs-keyword">var</span> n1,n2,n3,n4,sum_len <span class="hljs-keyword">int</span>
-    s_len=<span class="hljs-built_in">len</span>(s)
-    <span class="hljs-comment">//如果长度不达标</span>
-    <span class="hljs-keyword">if</span> s_len&lt;<span class="hljs-number">4</span> || s_len&gt;<span class="hljs-number">12</span>&#123;
-        <span class="hljs-keyword">return</span> []<span class="hljs-keyword">string</span>&#123;&#125;
-    &#125;
-    <span class="hljs-comment">//如果出现非法字符</span>
-    <span class="hljs-keyword">for</span> i:=<span class="hljs-number">0</span>;i&lt;s_len;i++&#123;
-        <span class="hljs-keyword">if</span> s[i]&lt;<span class="hljs-string">&#x27;0&#x27;</span> || s[i]&gt;<span class="hljs-string">&#x27;9&#x27;</span>&#123;
-            <span class="hljs-keyword">return</span> []<span class="hljs-keyword">string</span>&#123;&#125;
-        &#125;
-    &#125;
-    <span class="hljs-keyword">for</span> i:=<span class="hljs-number">0</span>;i&lt;s_len<span class="hljs-number">-3</span>&amp;&amp;i&lt;=<span class="hljs-number">2</span>;i++&#123;
-        <span class="hljs-keyword">for</span> j:=i+<span class="hljs-number">1</span>;j&lt;s_len<span class="hljs-number">-2</span>&amp;&amp;j-i&lt;=<span class="hljs-number">3</span>;j++&#123;
-            <span class="hljs-keyword">for</span> k:=j+<span class="hljs-number">1</span>;k&lt;s_len<span class="hljs-number">-1</span>&amp;&amp;k-j&lt;=<span class="hljs-number">3</span>;k++&#123;
-                n1,n2,n3,n4,sum_len=stio(s,i,j,k)
-                <span class="hljs-keyword">if</span> n1&lt;=<span class="hljs-number">255</span>&amp;&amp;n2&lt;=<span class="hljs-number">255</span>&amp;&amp;n3&lt;=<span class="hljs-number">255</span>&amp;&amp;n4&lt;=<span class="hljs-number">255</span>&amp;&amp;sum_len==s_len&#123;
-                    <span class="hljs-keyword">for</span> m:=<span class="hljs-number">0</span>;m&lt;s_len;m++&#123;
-                        s1=s1+<span class="hljs-keyword">string</span>(s[m])
-                        <span class="hljs-keyword">if</span> m==i||m==j||m==k&#123;
-                            s1=s1+<span class="hljs-string">&quot;.&quot;</span>
-                        &#125;
-                    &#125;
-                    s2=<span class="hljs-built_in">append</span>(s2,s1)
-                    <span class="hljs-comment">//重置s1</span>
-                    s1=s3
-                &#125;
-                n1,n2,n3=<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>
+              <h3 id="我要通过"><a href="#我要通过" class="headerlink" title="我要通过"></a><font size=6px>我要通过</font></h3><h4 id="题目描述："><a href="#题目描述：" class="headerlink" title="题目描述："></a>题目描述：</h4><p>“<strong>答案正确</strong>”是自动判题系统给出的最令人欢喜的回复。本题属于 PAT 的“<strong>答案正确</strong>”大派送 —— 只要读入的字符串满足下列条件，系统就输出“<strong>答案正确</strong>”，否则输出“<strong>答案错误</strong>”。</p>
+<p>得到“<strong>答案正确</strong>”的条件是：</p>
+<ol>
+<li>字符串中必须仅有 <code>P</code>、 <code>A</code>、 <code>T</code>这三种字符，不可以包含其它字符；</li>
+<li>任意形如 <code>xPATx</code> 的字符串都可以获得“<strong>答案正确</strong>”，其中 <code>x</code> 或者是空字符串，或者是仅由字母 <code>A</code> 组成的字符串；</li>
+<li>如果 <code>aPbTc</code> 是正确的，那么 <code>aPbATca</code> 也是正确的，其中 <code>a</code>、 <code>b</code>、 <code>c</code> 均或者是空字符串，或者是仅由字母 <code>A</code> 组成的字符串。</li>
+</ol>
+<p>现在就请你为 PAT 写一个自动裁判程序，判定哪些字符串是可以获得“<strong>答案正确</strong>”的。</p>
+<h3 id="输入格式："><a href="#输入格式：" class="headerlink" title="输入格式："></a>输入格式：</h3><p>每个测试输入包含 1 个测试用例。第 1 行给出一个正整数 <em>n</em> (&lt;10)，是需要检测的字符串个数。接下来每个字符串占一行，字符串长度不超过 100，且不包含空格。</p>
+<h3 id="输出格式："><a href="#输出格式：" class="headerlink" title="输出格式："></a>输出格式：</h3><p>每个字符串的检测结果占一行，如果该字符串可以获得“<strong>答案正确</strong>”，则输出 <code>YES</code>，否则输出 <code>NO</code>。</p>
+<h3 id="输入样例："><a href="#输入样例：" class="headerlink" title="输入样例："></a>输入样例：</h3><pre><code class="hljs in">8
+PAT
+PAAT
+AAPATAA
+AAPAATAAAA
+xPATx
+PT
+Whatever
+APAAATAA</code></pre>
 
+<h3 id="输出样例："><a href="#输出样例：" class="headerlink" title="输出样例："></a>输出样例：</h3><pre><code class="hljs out">YES
+YES
+YES
+YES
+NO
+NO
+NO
+NO</code></pre>
+
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路:"></a>思路:</h4><p>先读懂题目，只能有P A T三个字母，其他字母不行</p>
+<p><strong>3、如果 <code>aPbTc</code> 是正确的，那么 <code>aPbATca</code> 也是正确的，其中 <code>a</code>、 <code>b</code>、 <code>c</code> 均或者是空字符串，或者是仅由字母 <code>A</code> 组成的字符串。</strong>最重要是第三个条件，设P前面的A的数量为counta，P和T中间A的数量为countb，T之后的A的数量为countc，找规律就可以知道countc=counta*countb，这个规律知道之后就好写了</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码:"></a>代码:</h4><pre><code class="hljs go"><span class="hljs-keyword">package</span> main
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;fmt&quot;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>  &#123;
+    <span class="hljs-keyword">var</span> n , i ,j , counta ,countb,countc,flag <span class="hljs-keyword">int</span>
+    <span class="hljs-keyword">var</span> s <span class="hljs-keyword">string</span>
+    fmt.Scanf(<span class="hljs-string">&quot;%d&quot;</span>,&amp;n)
+    <span class="hljs-keyword">for</span> i&lt;n&#123;
+        
+        fmt.Scanf(<span class="hljs-string">&quot;%s&quot;</span>,&amp;s)
+        <span class="hljs-comment">//判断有无其他字符</span>
+        <span class="hljs-keyword">for</span> k:=<span class="hljs-number">0</span>;k&lt;<span class="hljs-built_in">len</span>(s);k++&#123;
+            <span class="hljs-keyword">if</span> s[k]!=<span class="hljs-string">&#x27;P&#x27;</span>&amp;&amp;s[k]!=<span class="hljs-string">&#x27;T&#x27;</span>&amp;&amp;s[k]!=<span class="hljs-string">&#x27;A&#x27;</span>&#123;
+                i++
+                flag=<span class="hljs-number">1</span>
+                <span class="hljs-keyword">break</span>
             &#125;
         &#125;
+        <span class="hljs-keyword">if</span> flag==<span class="hljs-number">1</span>&#123;
+            flag=<span class="hljs-number">0</span>
+            fmt.Printf(<span class="hljs-string">&quot;NO\n&quot;</span>)
+            <span class="hljs-keyword">continue</span>
+        &#125;
+        <span class="hljs-keyword">for</span> j&lt;<span class="hljs-built_in">len</span>(s)&amp;&amp;s[j]!=<span class="hljs-string">&#x27;P&#x27;</span>&#123;
+            counta++
+            j++
+        &#125;
+        j++
+        <span class="hljs-keyword">for</span> j&lt;<span class="hljs-built_in">len</span>(s)&amp;&amp;s[j]!=<span class="hljs-string">&#x27;T&#x27;</span>&#123;
+            countb++
+            j++
+        &#125;
+        countc=<span class="hljs-built_in">len</span>(s)-countb-counta<span class="hljs-number">-2</span>
+        <span class="hljs-comment">//println(counta ,countb ,countc)</span>
+        <span class="hljs-keyword">if</span> countb==<span class="hljs-number">0</span>||counta*countb!=countc&#123;
+            fmt.Printf(<span class="hljs-string">&quot;NO\n&quot;</span>)
+        &#125;<span class="hljs-keyword">else</span> &#123;
+            fmt.Printf(<span class="hljs-string">&quot;YES\n&quot;</span>)
+        &#125;
+        <span class="hljs-comment">//清零</span>
+        countc=<span class="hljs-number">0</span>
+        counta=<span class="hljs-number">0</span>
+        countb=<span class="hljs-number">0</span>
+        j=<span class="hljs-number">0</span>
+        i++
     &#125;
-    <span class="hljs-keyword">return</span> s2
-&#125;
-<span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">stio</span><span class="hljs-params">(s <span class="hljs-keyword">string</span>,a <span class="hljs-keyword">int</span>,b <span class="hljs-keyword">int</span> ,c <span class="hljs-keyword">int</span>)</span> <span class="hljs-params">(<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>)</span></span> &#123;
-    <span class="hljs-keyword">var</span> n1,n2,n3,n4 <span class="hljs-keyword">int</span>
-    <span class="hljs-keyword">var</span> sum_len <span class="hljs-keyword">int</span>
-    <span class="hljs-keyword">for</span> i:=<span class="hljs-number">0</span>;i&lt;=a;i++&#123;
-        n1=n1*<span class="hljs-number">10</span>+<span class="hljs-keyword">int</span>(s[i]-<span class="hljs-string">&#x27;0&#x27;</span>)
-    &#125;
-    <span class="hljs-keyword">for</span> i:=a+<span class="hljs-number">1</span>;i&lt;=b;i++&#123;
-        n2=n2*<span class="hljs-number">10</span>+<span class="hljs-keyword">int</span>(s[i]-<span class="hljs-string">&#x27;0&#x27;</span>)
-    &#125;
-    <span class="hljs-keyword">for</span> i:=b+<span class="hljs-number">1</span>;i&lt;=c;i++&#123;
-        n3=n3*<span class="hljs-number">10</span>+<span class="hljs-keyword">int</span>(s[i]-<span class="hljs-string">&#x27;0&#x27;</span>)
-    &#125;
-    <span class="hljs-keyword">for</span> i:=c+<span class="hljs-number">1</span>;i&lt;s_len;i++&#123;
-        n4=n4*<span class="hljs-number">10</span>+<span class="hljs-keyword">int</span>(s[i]-<span class="hljs-string">&#x27;0&#x27;</span>)
-    &#125;
-    
-    sum_len=<span class="hljs-built_in">len</span>(strconv.Itoa(n1))+<span class="hljs-built_in">len</span>(strconv.Itoa(n2))+<span class="hljs-built_in">len</span>(strconv.Itoa(n3))+<span class="hljs-built_in">len</span>(strconv.Itoa(n4))
-    <span class="hljs-keyword">return</span> n1,n2,n3,n4,sum_len
 &#125;</code></pre>
-
-<h4 id="代码效率："><a href="#代码效率：" class="headerlink" title="代码效率："></a>代码效率：</h4><p class="note note-primary"; style="font-size:22px">
-   执行用时：0 ms, 在所有 Go 提交中击败了100.00%的用户<br>
-   内存消耗：2.1 MB, 在所有 Go 提交中击败了56.25%的用户
-</p>
 
 
             </div>
@@ -323,7 +321,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%8A%9B%E6%89%A3%E5%88%B7%E9%A2%98/">力扣刷题</a>
+                      <a class="hover-with-bg" href="/categories/PAT%E5%88%B7%E9%A2%98/">PAT刷题</a>
                     
                   </div>
                 
@@ -332,8 +330,6 @@
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/golang/">golang</a>
-                    
-                      <a class="hover-with-bg" href="/tags/string/">string</a>
                     
                   </div>
                 
@@ -346,9 +342,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/02/05/PAT/1001%20%E5%AE%B3%E6%AD%BB%E4%BA%BA%E4%B8%8D%E5%81%BF%E5%91%BD%E7%9A%84(3n+1)%E7%8C%9C%E6%83%B3%20/">
+                      <a href="/2021/02/07/PAT/1004%20%E6%88%90%E7%BB%A9%E6%8E%92%E5%90%8D/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">1001 害死人不偿命的(3n+1)猜想</span>
+                        <span class="hidden-mobile">1004 成绩排名</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -356,8 +352,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/01/30/%E5%8A%9B%E6%89%A3/%E5%8A%9B%E6%89%A3%E4%BA%8C%E5%8D%81%EF%BC%9A%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/">
-                        <span class="hidden-mobile">力扣二十：有效的括号</span>
+                      <a href="/2021/02/05/PAT/1002%20%E5%86%99%E5%87%BA%E8%BF%99%E4%B8%AA%E6%95%B0/">
+                        <span class="hidden-mobile">1002 写出这个数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -376,8 +372,8 @@
     <div id="disqus_thread"></div>
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'http://example.com/2021/02/02/%E5%8A%9B%E6%89%A3/%E5%8A%9B%E6%89%A3%E4%B9%9D%E5%8D%81%E4%B8%89%EF%BC%9A%E5%A4%8D%E5%8E%9FIP%E5%9C%B0%E5%9D%80/';
-        this.page.identifier = '/2021/02/02/%E5%8A%9B%E6%89%A3/%E5%8A%9B%E6%89%A3%E4%B9%9D%E5%8D%81%E4%B8%89%EF%BC%9A%E5%A4%8D%E5%8E%9FIP%E5%9C%B0%E5%9D%80/';
+        this.page.url = 'http://example.com/2021/02/07/PAT/1003%20%E6%88%91%E8%A6%81%E9%80%9A%E8%BF%87/';
+        this.page.identifier = '/2021/02/07/PAT/1003%20%E6%88%91%E8%A6%81%E9%80%9A%E8%BF%87/';
       };
       function loadDisqus() {
         (function () {
@@ -549,7 +545,7 @@
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "力扣九十三：复原IP地址&nbsp;",
+        "1003 我要通过&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
